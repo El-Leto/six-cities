@@ -2,14 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
 
-const Setting = {
-  PLACES_COUNT: 5,
-};
+// const Setting = {
+//   PLACES_COUNT: 5,
+// };
 
 ReactDOM.render(
   <React.StrictMode>
-    <App
-      placeCardCount={Setting.PLACES_COUNT}
-    />
+    <App />
   </React.StrictMode>,
   document.getElementById('root'));
