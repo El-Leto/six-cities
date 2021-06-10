@@ -1,4 +1,4 @@
-import { nanoid } from '@reduxjs/toolkit';
+const AVATAR_URL = 'https://i.pravatar.cc/128';
 
 const hotels = [
   {
@@ -14,12 +14,12 @@ const hotels = [
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     goods: ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
     host: {
-      avatarUrl: 'img/avatar-angelina.jpg',
+      avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
       id: 3,
       isPro: true,
       name: 'Angelina',
     },
-    id: nanoid(),
+    id: 1,
     images: ['img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/studio-01.jpg', 'img/studio-01.jpg'],
     isFavorite: false,
     isPremium: false,
@@ -30,7 +30,7 @@ const hotels = [
     },
     maxAdults: 4,
     previewImage: 'img/1.png',
-    price: 120,
+    price: 130,
     rating: 4.8,
     title: 'Beautiful & luxurious studio at great location',
     type: 'apartment',
@@ -48,12 +48,12 @@ const hotels = [
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     goods: ['Heating', 'Kitchen', 'Washing machine', 'Dishwasher'],
     host: {
-      avatarUrl: 'img/avatar-angelina.jpg',
+      avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
       id: 3,
       isPro: false,
       name: 'Maria',
     },
-    id: nanoid(),
+    id: 2,
     images: ['img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/studio-01.jpg', 'img/studio-01.jpg'],
     isFavorite: false,
     isPremium: false,
@@ -82,12 +82,12 @@ const hotels = [
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     goods: ['Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine'],
     host: {
-      avatarUrl: 'img/avatar-angelina.jpg',
+      avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
       id: 3,
       isPro: true,
       name: 'Alex',
     },
-    id: nanoid(),
+    id: 3,
     images: ['img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/studio-01.jpg', 'img/studio-01.jpg'],
     isFavorite: false,
     isPremium: false,
@@ -116,12 +116,12 @@ const hotels = [
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     goods: ['Heating', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
     host: {
-      avatarUrl: 'img/avatar-angelina.jpg',
+      avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
       id: 3,
       isPro: false,
       name: 'Nick',
     },
-    id: nanoid(),
+    id: 4,
     images: ['img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/studio-01.jpg', 'img/studio-01.jpg'],
     isFavorite: false,
     isPremium: false,

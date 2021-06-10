@@ -1,7 +1,10 @@
 import React from 'react';
 import Logo from '../logo/logo';
+import roomProp from './room.prop';
 
-function RoomPage() {
+function RoomPage(props) {
+  const {hotel} = props;
+  const {price} = hotel;
 
   return (
 
@@ -89,7 +92,7 @@ function RoomPage() {
                 </li>
               </ul>
               <div className="property__price">
-                <b className="property__price-value">&euro;120</b>
+                <b className="property__price-value">&euro;{price}</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
@@ -332,5 +335,9 @@ function RoomPage() {
     </div>
   );
 }
+
+RoomPage.propTypes = {
+  hotel: roomProp,
+};
 
 export default RoomPage;
