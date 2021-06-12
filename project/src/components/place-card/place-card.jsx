@@ -22,7 +22,6 @@ function PlaceCard({
     <article
       onMouseEnter = {(evt) => {
         const idCard = evt.currentTarget.id;
-        console.log(idCard);
         setHoverCard(idCard);
       }}
       className={
