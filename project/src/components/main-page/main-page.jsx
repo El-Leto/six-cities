@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PlaceCard from '../place-card/place-card';
+import PlaceList from '../place-list/place-list';
 import Logo from '../logo/logo';
+import hotelProp from '../app/hotel.prop';
 
 function MainPage(props) {
-  const {placeCardCount} = props;
+  const {hotels} = props;
 
   return (
 
@@ -92,9 +93,7 @@ function MainPage(props) {
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {new Array(placeCardCount).fill().map((place) => <PlaceCard key={place}/>)}
-              </div>
+              <PlaceList hotels={hotels} />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
@@ -107,7 +106,8 @@ function MainPage(props) {
 }
 
 MainPage.propTypes = {
-  placeCardCount: PropTypes.number.isRequired,
+  //placeCardCount: PropTypes.number.isRequired,
+  hotels: PropTypes.arrayOf(hotelProp).isRequired,
 };
 
 export default MainPage;

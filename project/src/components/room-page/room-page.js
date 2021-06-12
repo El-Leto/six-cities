@@ -1,6 +1,7 @@
 import React from 'react';
+//import PropTypes from 'prop-types';
 import Logo from '../logo/logo';
-import roomProp from './room.prop';
+import hotelProp from '../app/hotel.prop';
 
 function RoomPage(props) {
   const {hotel} = props;
@@ -337,7 +338,7 @@ function RoomPage(props) {
 }
 
 RoomPage.propTypes = {
-  hotel: roomProp,
+  hotel: hotelProp,
 };
 
 export default RoomPage;

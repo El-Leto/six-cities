@@ -16,11 +16,11 @@ export default PropTypes.shape({
   ).isRequired,
   host: PropTypes.shape({
     avatarUrl: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     isPro: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   images: PropTypes.arrayOf(
     PropTypes.string.isRequired,
   ).isRequired,

@@ -1,7 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Logo from '../logo/logo';
+import PlaceCard from '../place-card/place-card';
+import hotelProp from '../app/hotel.prop';
 
-function FavoritesPage() {
+function FavoritesPage(props) {
+  const {hotels} = props;
 
   return (
 
@@ -44,6 +48,7 @@ function FavoritesPage() {
                   </div>
                 </div>
                 <div className="favorites__places">
+                  {hotels.map((place) => <PlaceCard key={place.id} hotel={place} isFavorites />)}
                   <article className="favorites__card place-card">
                     <div className="favorites__image-wrapper place-card__image-wrapper">
                       <a href="/#">
@@ -164,5 +169,9 @@ function FavoritesPage() {
     </div>
   );
 }
+
+FavoritesPage.propTypes = {
+  hotels: PropTypes.arrayOf(hotelProp).isRequired,
+};
 
 export default FavoritesPage;
