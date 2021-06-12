@@ -5,6 +5,7 @@ import { getRatingInPercent } from '../../utils';
 
 function PlaceCard({
   hotel: {
+    id,
     isPremium,
     price,
     rating,
@@ -12,17 +13,23 @@ function PlaceCard({
     type,
   },
   isFavorites,
+  setHoverCard = () => {},
 }) {
 
   const placeRating = getRatingInPercent(rating);
 
   return (
     <article
+      onMouseEnter = {(evt) => {
+        const idCard = evt.currentTarget.id;
+        console.log(idCard);
+        setHoverCard(idCard);
+      }}
       className={
         isFavorites
           ? 'favorites__card place-card'
           : 'cities__place-card place-card'
-      }
+      } id={id}
     >
       {isPremium && (
         <div className="place-card__mark">
@@ -87,6 +94,7 @@ function PlaceCard({
 PlaceCard.propTypes = {
   hotel: hotelProp,
   isFavorites: PropTypes.bool,
+  setHoverCard: PropTypes.func,
 };
 
 export default PlaceCard;
