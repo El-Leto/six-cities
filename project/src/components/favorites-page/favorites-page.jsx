@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Logo from '../logo/logo';
-//import PlaceCard from '../place-card/place-card';
 import FavoriteList from '../favorite-list/favorite-list';
 import hotelProp from '../app/hotel.prop';
 
@@ -40,20 +39,6 @@ function FavoritesPage(props) {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <FavoriteList hotels={hotels} />
-            {/* <ul className="favorites__list">
-              <li className="favorites__locations-items">
-                <div className="favorites__locations locations locations--current">
-                  <div className="locations__item">
-                    <a className="locations__item-link" href="/#">
-                      <span>Amsterdam</span>
-                    </a>
-                  </div>
-                </div>
-                <div className="favorites__places">
-                  {favoriteHotels.map((place) => <PlaceCard key={place.id} hotel={place} isFavorites />)}
-                </div>
-              </li>
-            </ul> */}
           </section>
         </div>
       </main>

@@ -8,18 +8,16 @@ import SingInPage from '../sing-in-page/sing-in-page';
 import FavoritesPage from '../favorites-page/favorites-page';
 import NotFoundPage from '../not-found-page/not-found-page';
 import hotelProp from './hotel.prop';
-//import reviewProp from './review.prop';
+import reviewProp from './review.prop';
 
 function App(props) {
-  const {hotels} = props;
-  const [firstHotel] = hotels;
+  const {hotels, reviews} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.MAIN}>
           <MainPage
-            //placeCardCount={placeCardCount}
             hotels={hotels}
           />
         </Route>
@@ -33,7 +31,8 @@ function App(props) {
         </Route>
         <Route exact path={AppRoute.ROOM}>
           <RoomPage
-            hotel={firstHotel}
+            hotels={hotels}
+            reviews={reviews}
           />
         </Route>
         <Route>
@@ -45,9 +44,8 @@ function App(props) {
 }
 
 App.propTypes = {
-  //placeCardCount: PropTypes.number.isRequired,
   hotels: PropTypes.arrayOf(hotelProp).isRequired,
-  ////reviews: reviewProp.isRequired,
+  reviews: PropTypes.arrayOf(reviewProp).isRequired,
 };
 
 export default App;

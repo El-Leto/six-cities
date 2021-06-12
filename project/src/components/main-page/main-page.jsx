@@ -106,7 +106,6 @@ function MainPage(props) {
 }
 
 MainPage.propTypes = {
-  //placeCardCount: PropTypes.number.isRequired,
   hotels: PropTypes.arrayOf(hotelProp).isRequired,
 };
 

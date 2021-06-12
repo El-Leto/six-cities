@@ -8,7 +8,7 @@ const reviews = [
     rating: 4,
     user: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: 4,
+      id: 1,
       isPro: false,
       name: 'Max',
     },
@@ -16,11 +16,11 @@ const reviews = [
   {
     comment: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     date: '2021-01-15T15:13:56.569Z',
-    id: 1,
-    rating: 4,
+    id: 2,
+    rating: 3,
     user: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: 4,
+      id: 2,
       isPro: false,
       name: 'Nick',
     },
@@ -28,11 +28,11 @@ const reviews = [
   {
     comment: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
     date: '2021-03-08T16:13:56.569Z',
-    id: 1,
-    rating: 4,
+    id: 3,
+    rating: 2,
     user: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
-      id: 4,
+      id: 3,
       isPro: false,
       name: 'Alex',
     },
@@ -40,8 +40,8 @@ const reviews = [
   {
     comment: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     date: '2021-05-18T17:13:56.569Z',
-    id: 1,
-    rating: 4,
+    id: 4,
+    rating: 5,
     user: {
       avatarUrl: `${AVATAR_URL}?rnd=${Math.random()}`,
       id: 4,

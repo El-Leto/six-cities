@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import hotelProp from '../app/hotel.prop';
 import { getRatingInPercent } from '../../utils';
@@ -7,6 +8,7 @@ function PlaceCard({
   hotel: {
     id,
     isPremium,
+    previewImage,
     price,
     rating,
     title,
@@ -42,13 +44,13 @@ function PlaceCard({
             : 'cities__image-wrapper place-card__image-wrapper'
         }
       >
-        <a href="/#">
-          <img className="place-card__image" src="img/apartment-01.jpg"
+        <Link to={`/offer/${id}`}>
+          <img className="place-card__image" src={previewImage}
             width={isFavorites ? '150' : '260'}
             height={isFavorites ? '110' : '200'}
             alt="Place"
           />
-        </a>
+        </Link>
       </div>
       <div
         className={

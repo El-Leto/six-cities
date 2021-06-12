@@ -11,8 +11,6 @@ function FavoriteList({ hotels }) {
   return (
     <ul className="favorites__list">
       {cities.map((city) => <FavoriteItem key={city} favoriteHotels={favoriteHotels} favoritesCity={city} />)}
-      {/* <FavoriteItem favoriteHotels={favoriteHotels} /> */}
-      {/* {favoriteHotels.map((place) => <PlaceCard key={place.id} hotel={place} />)} */}
     </ul>
   );
 }
