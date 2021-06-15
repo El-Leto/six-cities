@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PlaceList from '../place-list/place-list';
 import Logo from '../logo/logo';
+import MapPage from '../map-page/map-page';
 import hotelProp from '../app/hotel.prop';
 
 function MainPage(props) {
@@ -96,7 +97,7 @@ function MainPage(props) {
               <PlaceList hotels={hotels} />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <MapPage hotels={hotels} />
             </div>
           </div>
         </div>
