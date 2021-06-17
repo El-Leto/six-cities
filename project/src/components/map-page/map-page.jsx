@@ -9,7 +9,7 @@ const ZOOM = 12;
 
 const icon = L.icon({
   iconUrl: 'img/pin.svg',
-  iconSize: [30, 30],
+  iconSize: [30, 40],
 });
 
 
