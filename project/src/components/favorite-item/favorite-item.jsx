@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import PlaceCard from '../place-card/place-card';
 import hotelProp from '../app/hotel.prop';
+import { PlaceType } from '../../const';
 
 function FavoritesItem({ favoriteHotels, favoritesCity }) {
   const hotels = favoriteHotels.filter(
@@ -18,7 +19,7 @@ function FavoritesItem({ favoriteHotels, favoritesCity }) {
         </div>
       </div>
       <div className="favorites__places">
-        {hotels.map((place) => <PlaceCard key={place.id} hotel={place} isFavorites />)}
+        {hotels.map((place) => <PlaceCard key={place.id} hotel={place} placeType={PlaceType.FAVORITES} isFavorites />)}
       </div>
     </li>
   );
