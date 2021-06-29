@@ -4,12 +4,17 @@ import { connect } from 'react-redux';
 import PlaceList from '../place-list/place-list';
 import Logo from '../logo/logo';
 import MapPage from '../map-page/map-page';
+import MainPageEmpty from '../main-page-empty/main-page-empty';
 import hotelProp from '../app/hotel.prop';
 import CityList from '../city-list/city-list';
 import { CITIES } from '../../const';
 
 function MainPage(props) {
   const {hotels, city} = props;
+
+  if (!hotels.length) {
+    return <MainPageEmpty city={city} />;
+  }
 
   return (
 
