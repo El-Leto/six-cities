@@ -1,5 +1,5 @@
-import hotels from './mocks/hotels';
-import reviews from './mocks/reviews';
+import hotels from '../mocks/hotels';
+import reviews from '../mocks/reviews';
 import {ActionType} from './action';
 
 const INITIAL_CITY = 'Paris';
@@ -12,7 +12,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.CHANGE_HOTEL:
+    case ActionType.CHANGE_CITY:
       return {
         ...state,
         city: action.payload,
