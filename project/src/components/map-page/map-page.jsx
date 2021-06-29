@@ -28,7 +28,7 @@ function MapPage({ city, hotels }) {
               lng: longitude,
             },
             { icon })
-          .addTo(map);
+          .addTo(markers);
       });
 
       map.flyTo(

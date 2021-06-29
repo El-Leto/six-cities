@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Logo from '../logo/logo';
 import hotelProp from '../app/hotel.prop';
 import reviewProp from '../app/review.prop';
@@ -148,7 +149,7 @@ function RoomPage({ hotels, reviews }) {
             </div>
           </div>
           <section className="property__map map">
-            <MapPage hotels={nearHotels} />
+            <MapPage city={hotels[0].city} hotels={hotels} />
           </section>
         </section>
         <div className="container">
@@ -169,4 +170,10 @@ RoomPage.propTypes = {
   reviews: PropTypes.arrayOf(reviewProp).isRequired,
 };
 
-export default RoomPage;
+const mapStateToProps = ({ hotels, city }) => ({
+  hotels,
+  city,
+});
+
+export { RoomPage };
+export default connect(mapStateToProps)(RoomPage);
