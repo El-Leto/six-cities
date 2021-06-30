@@ -107,8 +107,8 @@ const hotels = [
     bedrooms: 1,
     city: {
       location: {
-        latitude: 52.370216,
-        longitude: 4.895168,
+        latitude: 48.853410,
+        longitude: 2.34880,
         zoom: 10,
       },
       name: 'Paris',
@@ -126,8 +126,8 @@ const hotels = [
     isFavorite: true,
     isPremium: true,
     location: {
-      latitude: 52.3809553943508,
-      longitude: 4.939309666406198,
+      latitude: 48.853410,
+      longitude: 2.34880,
       zoom: 8,
     },
     maxAdults: 4,
