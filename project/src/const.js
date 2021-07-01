@@ -44,3 +44,15 @@ export const CITIES = [
   'Dusseldorf',
 ];
 
+export const SORTS = [
+  'Popular',
+  'Price: low to high',
+  'Price: high to low',
+  'Top rated first',
+];
+
+export const SortType = {
+  BY_CHEAPER: 'Price: low to high',
+  BY_MORE_EXPENSIVE: 'Price: high to low',
+  BY_RATING: 'Top rated first',
+};

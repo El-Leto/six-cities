@@ -7,10 +7,14 @@ import MapPage from '../map-page/map-page';
 import MainPageEmpty from '../main-page-empty/main-page-empty';
 import hotelProp from '../app/hotel.prop';
 import CityList from '../city-list/city-list';
-import { CITIES } from '../../const';
+import { SiteSort } from '../site-sort/site-sort';
+import { CITIES, SORTS } from '../../const';
+import { sortHotels } from '../../utils';
 
 function MainPage(props) {
-  const {hotels, city} = props;
+  const {hotels, city, activeSort} = props;
+
+  const sortedHotels = sortHotels(activeSort, hotels);
 
   if (!hotels.length) {
     return <MainPageEmpty city={city} />;
@@ -56,22 +60,8 @@ function MainPage(props) {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{hotels.length} places to stay in {city}</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex="0">
-                    Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex="0">Popular</li>
-                  <li className="places__option" tabIndex="0">Price: low to high</li>
-                  <li className="places__option" tabIndex="0">Price: high to low</li>
-                  <li className="places__option" tabIndex="0">Top rated first</li>
-                </ul>
-              </form>
-              <PlaceList hotels={hotels} />
+              <SiteSort sorts={SORTS} activeSort={activeSort}/>
+              <PlaceList hotels={sortedHotels} />
             </section>
             <div className="cities__right-section">
               <MapPage city={hotels[0].city} hotels={hotels} />
@@ -86,11 +76,13 @@ function MainPage(props) {
 MainPage.propTypes = {
   hotels: PropTypes.arrayOf(hotelProp).isRequired,
   city: PropTypes.string.isRequired,
+  activeSort: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({ hotels, city }) => ({
+const mapStateToProps = ({ hotels, city, activeSort }) => ({
   hotels,
   city,
+  activeSort,
 });
 
 export { MainPage };
