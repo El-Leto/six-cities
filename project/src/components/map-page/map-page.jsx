@@ -5,13 +5,19 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import hotelProp from '../app/hotel.prop';
 
-const icon = L.icon({
+const defaultIcon = L.icon({
   iconUrl: 'img/pin.svg',
   iconSize: [30, 40],
+  iconAnchor: [15, 30],
 });
 
+const activeIcon = L.icon({
+  iconUrl: 'img/pin-active.svg',
+  iconSize: [30, 40],
+  iconAnchor: [15, 30],
+});
 
-function MapPage({ city, hotels }) {
+function MapPage({ city, hotels, activeCard }) {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -20,14 +26,19 @@ function MapPage({ city, hotels }) {
 
     if (map) {
       markers.addTo(map);
-      hotels.forEach(({ location: { latitude, longitude } }) => {
+      hotels.forEach(({ location: { latitude, longitude }, id }) => {
         L
           .marker(
             {
               lat: latitude,
               lng: longitude,
             },
-            { icon })
+            {
+              icon:
+                (id === activeCard.id)
+                  ? activeIcon
+                  : defaultIcon,
+            })
           .addTo(markers);
       });
 
@@ -41,7 +52,7 @@ function MapPage({ city, hotels }) {
       markers.clearLayers();
     };
 
-  }, [map, hotels]);
+  }, [map, hotels, activeCard]);
 
 
   return (
@@ -63,6 +74,7 @@ MapPage.propTypes = {
     }).isRequired,
   }).isRequired,
   hotels: PropTypes.arrayOf(hotelProp).isRequired,
+  activeCard: PropTypes.object.isRequired,
 };
 
 export default MapPage;

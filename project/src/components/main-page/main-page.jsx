@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import PlaceList from '../place-list/place-list';
@@ -13,6 +13,13 @@ import { sortHotels } from '../../utils';
 
 function MainPage(props) {
   const {hotels, city, activeSort} = props;
+
+  const [activeCard, setActiveCard] = useState({});
+
+  const onCardHover = (id) => {
+    const currentCard = hotels.find((hotel) => hotel.id === Number(id));
+    setActiveCard(currentCard);
+  };
 
   const sortedHotels = sortHotels(activeSort, hotels);
 
@@ -61,10 +68,15 @@ function MainPage(props) {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{hotels.length} places to stay in {city}</b>
               <SiteSort sorts={SORTS} activeSort={activeSort}/>
-              <PlaceList hotels={sortedHotels} />
+              <PlaceList
+                isMainPage
+                hotels={sortedHotels}
+                onMouseEnter={onCardHover}
+                onMouseLeave={() => setActiveCard('')}
+              />
             </section>
             <div className="cities__right-section">
-              <MapPage city={hotels[0].city} hotels={hotels} />
+              <MapPage city={hotels[0].city} hotels={hotels} activeCard={activeCard}/>
             </div>
           </div>
         </div>

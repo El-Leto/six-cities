@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -9,10 +9,9 @@ import ImageList from '../image-list/image-list';
 import PropertyList from '../property-list/property-list';
 import ReviewsList from '../reviews-list/reviews-list';
 import ReviewForm from '../review-form/review-form';
-import PlaceCard from '../place-card/place-card';
+import PlaceList from '../place-list/place-list';
 import MapPage from '../map-page/map-page';
 import { getRatingInPercent } from '../../utils';
-import { PlaceType } from '../../const';
 
 function RoomPage({ hotels, reviews }) {
 
@@ -20,6 +19,13 @@ function RoomPage({ hotels, reviews }) {
 
   const hotel = hotels.find((item) => `/offer/${item.id}` === location.pathname);
   const nearHotels = hotels.filter((item) => item.id !== hotel.id);
+
+  const [activeCard, setActiveCard] = useState(hotel);
+
+  const onCardHover = (cardId) => {
+    const currentCard = hotels.find((offer) => offer.id === Number(cardId));
+    setActiveCard(currentCard);
+  };
 
   const {
     price,
@@ -149,15 +155,17 @@ function RoomPage({ hotels, reviews }) {
             </div>
           </div>
           <section className="property__map map">
-            <MapPage city={hotels[0].city} hotels={hotels} />
+            <MapPage city={hotels[0].city} hotels={hotels} activeCard={activeCard} />
           </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <div className="near-places__list places__list">
-              {nearHotels.map((place) => <PlaceCard key={place.id} hotel={place} placeType={PlaceType.MAIN} />)}
-            </div>
+            <PlaceList
+              hotels={nearHotels}
+              onMouseEnter={onCardHover}
+              onMouseLeave={() => setActiveCard(hotel)}
+            />
           </section>
         </div>
       </main>
