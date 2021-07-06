@@ -7,12 +7,12 @@ import MapPage from '../map-page/map-page';
 import MainPageEmpty from '../main-page-empty/main-page-empty';
 import hotelProp from '../app/hotel.prop';
 import CityList from '../city-list/city-list';
-import { SiteSort } from '../site-sort/site-sort';
+import { SortHotels } from '../sort-hotels/sort-hotels';
 import { CITIES, SORTS } from '../../const';
 import { sortHotels } from '../../utils';
 
 function MainPage(props) {
-  const {hotels, city, activeSort} = props;
+  const {hotels, city, activeSortType} = props;
 
   const [activeCard, setActiveCard] = useState({});
 
@@ -21,7 +21,7 @@ function MainPage(props) {
     setActiveCard(currentCard);
   };
 
-  const sortedHotels = sortHotels(activeSort, hotels);
+  const sortedHotels = sortHotels(activeSortType, hotels);
 
   if (!hotels.length) {
     return <MainPageEmpty city={city} />;
@@ -67,12 +67,12 @@ function MainPage(props) {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{hotels.length} places to stay in {city}</b>
-              <SiteSort sorts={SORTS} activeSort={activeSort}/>
+              <SortHotels sortTypes={SORTS} activeSortType={activeSortType}/>
               <PlaceList
                 isMainPage
                 hotels={sortedHotels}
                 onMouseEnter={onCardHover}
-                onMouseLeave={() => setActiveCard('')}
+                onMouseLeave={() => setActiveCard(null)}
               />
             </section>
             <div className="cities__right-section">
@@ -88,13 +88,13 @@ function MainPage(props) {
 MainPage.propTypes = {
   hotels: PropTypes.arrayOf(hotelProp).isRequired,
   city: PropTypes.string.isRequired,
-  activeSort: PropTypes.string.isRequired,
+  activeSortType: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({ hotels, city, activeSort }) => ({
+const mapStateToProps = ({ hotels, city, activeSortType }) => ({
   hotels,
   city,
-  activeSort,
+  activeSortType,
 });
 
 export { MainPage };

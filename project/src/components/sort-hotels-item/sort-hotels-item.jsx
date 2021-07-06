@@ -3,18 +3,18 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ActionCreator } from '../../store/action';
 
-function SiteSortItem({ item, changeSort, activeSort }) {
+function SortHotelsItem({ item, setSortType, activeSortType }) {
 
   return (
     <li
       key={item}
       className={
-        activeSort === item
+        activeSortType === item
           ? 'places__option places__option--active'
           : 'places__option'
       }
       onClick={() => {
-        changeSort(item);
+        setSortType(item);
       }}
       tabIndex="0"
     >
@@ -23,15 +23,15 @@ function SiteSortItem({ item, changeSort, activeSort }) {
   );
 }
 
-SiteSortItem.propTypes = {
+SortHotelsItem.propTypes = {
   item: PropTypes.string.isRequired,
-  changeSort: PropTypes.func.isRequired,
-  activeSort: PropTypes.string.isRequired,
+  setSortType: PropTypes.func.isRequired,
+  activeSortType: PropTypes.string.isRequired,
 };
 
 const mapDispatchToProps = {
-  changeSort: ActionCreator.changeSort,
+  setSortType: ActionCreator.setSortType,
 };
 
-export { SiteSortItem };
-export default connect(null, mapDispatchToProps)(SiteSortItem);
+export { SortHotelsItem };
+export default connect(null, mapDispatchToProps)(SortHotelsItem);

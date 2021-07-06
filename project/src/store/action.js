@@ -1,7 +1,7 @@
 export const ActionType = {
   CHANGE_CITY: 'changeCity',
   FILL_PLACE_LIST: 'fillPlaceList',
-  CHANGE_SORT: 'changeSort',
+  SET_SORT_TYPE: 'setSortType',
 };
 
 export const ActionCreator = {
@@ -13,8 +13,8 @@ export const ActionCreator = {
     type: ActionType.FILL_PLACE_LIST,
     payload: city,
   }),
-  changeSort: (sort) => ({
-    type: ActionType.CHANGE_SORT,
+  setSortType: (sort) => ({
+    type: ActionType.SET_SORT_TYPE,
     payload: sort,
   }),
 };

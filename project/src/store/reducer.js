@@ -9,7 +9,7 @@ const initialState = {
   city: INITIAL_CITY,
   hotels: hotels.filter(({ city }) => city.name === INITIAL_CITY),
   reviews: reviews,
-  activeSort: INITIAL_SITE_SORT,
+  activeSortType: INITIAL_SITE_SORT,
 };
 
 const reducer = (state = initialState, action) => {
@@ -18,18 +18,18 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         city: action.payload,
-        activeSort: INITIAL_SITE_SORT,
+        activeSortType: INITIAL_SITE_SORT,
       };
     case ActionType.FILL_PLACE_LIST:
       return {
         ...state,
         hotels: hotels.filter(({ city }) => city.name === action.payload),
-        activeSort: INITIAL_SITE_SORT,
+        activeSortType: INITIAL_SITE_SORT,
       };
-    case ActionType.CHANGE_SORT:
+    case ActionType.SET_SORT_TYPE:
       return {
         ...state,
-        activeSort: action.payload,
+        activeSortType: action.payload,
       };
     default:
       return state;

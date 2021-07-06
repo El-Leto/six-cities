@@ -35,7 +35,7 @@ function MapPage({ city, hotels, activeCard }) {
             },
             {
               icon:
-                (id === activeCard.id)
+                (activeCard && id === activeCard.id)
                   ? activeIcon
                   : defaultIcon,
             })
@@ -74,7 +74,7 @@ MapPage.propTypes = {
     }).isRequired,
   }).isRequired,
   hotels: PropTypes.arrayOf(hotelProp).isRequired,
-  activeCard: PropTypes.object.isRequired,
+  activeCard: PropTypes.object,
 };
 
 export default MapPage;
