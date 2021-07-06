@@ -17,17 +17,16 @@ function PlaceCard({
   },
   placeType,
   isFavorites,
-  setHoverCard = () => {},
+  onMouseEnter,
+  onMouseLeave,
 }) {
 
   const placeRating = getRatingInPercent(rating);
 
   return (
     <article
-      onMouseEnter = {(evt) => {
-        const idCard = evt.currentTarget.id;
-        setHoverCard(idCard);
-      }}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
       className={placeCardType[placeType].className} id={id}
     >
       {isPremium && (
@@ -80,7 +79,8 @@ PlaceCard.propTypes = {
   hotel: hotelProp,
   isFavorites: PropTypes.bool,
   placeType: PropTypes.string.isRequired,
-  setHoverCard: PropTypes.func,
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func,
 };
 
 export default PlaceCard;

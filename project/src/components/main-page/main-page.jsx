@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import PlaceList from '../place-list/place-list';
@@ -7,10 +7,21 @@ import MapPage from '../map-page/map-page';
 import MainPageEmpty from '../main-page-empty/main-page-empty';
 import hotelProp from '../app/hotel.prop';
 import CityList from '../city-list/city-list';
-import { CITIES } from '../../const';
+import { SortHotels } from '../sort-hotels/sort-hotels';
+import { CITIES, SORTS } from '../../const';
+import { sortHotels } from '../../utils';
 
 function MainPage(props) {
-  const {hotels, city} = props;
+  const {hotels, city, activeSortType} = props;
+
+  const [activeCard, setActiveCard] = useState({});
+
+  const onCardHover = (id) => {
+    const currentCard = hotels.find((hotel) => hotel.id === Number(id));
+    setActiveCard(currentCard);
+  };
+
+  const sortedHotels = sortHotels(activeSortType, hotels);
 
   if (!hotels.length) {
     return <MainPageEmpty city={city} />;
@@ -56,25 +67,16 @@ function MainPage(props) {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{hotels.length} places to stay in {city}</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex="0">
-                    Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex="0">Popular</li>
-                  <li className="places__option" tabIndex="0">Price: low to high</li>
-                  <li className="places__option" tabIndex="0">Price: high to low</li>
-                  <li className="places__option" tabIndex="0">Top rated first</li>
-                </ul>
-              </form>
-              <PlaceList hotels={hotels} />
+              <SortHotels sortTypes={SORTS} activeSortType={activeSortType}/>
+              <PlaceList
+                isMainPage
+                hotels={sortedHotels}
+                onMouseEnter={onCardHover}
+                onMouseLeave={() => setActiveCard(null)}
+              />
             </section>
             <div className="cities__right-section">
-              <MapPage city={hotels[0].city} hotels={hotels} />
+              <MapPage city={hotels[0].city} hotels={hotels} activeCard={activeCard}/>
             </div>
           </div>
         </div>
@@ -86,11 +88,13 @@ function MainPage(props) {
 MainPage.propTypes = {
   hotels: PropTypes.arrayOf(hotelProp).isRequired,
   city: PropTypes.string.isRequired,
+  activeSortType: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({ hotels, city }) => ({
+const mapStateToProps = ({ hotels, city, activeSortType }) => ({
   hotels,
   city,
+  activeSortType,
 });
 
 export { MainPage };
