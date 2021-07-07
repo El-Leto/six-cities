@@ -23,6 +23,8 @@ function MainPage(props) {
 
   const sortedHotels = sortHotels(activeSortType, hotels);
 
+  const sortedByCityHotels = sortedHotels.filter((hotel) => hotel.city.name === city);
+
   if (!hotels.length) {
     return <MainPageEmpty city={city} />;
   }
@@ -70,13 +72,13 @@ function MainPage(props) {
               <SortHotels sortTypes={SORTS} activeSortType={activeSortType}/>
               <PlaceList
                 isMainPage
-                hotels={sortedHotels}
+                hotels={sortedByCityHotels}
                 onMouseEnter={onCardHover}
                 onMouseLeave={() => setActiveCard(null)}
               />
             </section>
             <div className="cities__right-section">
-              <MapPage city={hotels[0].city} hotels={hotels} activeCard={activeCard}/>
+              <MapPage city={sortedByCityHotels[0].city} hotels={sortedByCityHotels} activeCard={activeCard}/>
             </div>
           </div>
         </div>

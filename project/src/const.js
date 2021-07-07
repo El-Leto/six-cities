@@ -56,3 +56,15 @@ export const SortType = {
   BY_MORE_EXPENSIVE: 'Price: high to low',
   BY_RATING: 'Top rated first',
 };
+
+export const AuthorizationStatus = {
+  AUTH: 'AUTH',
+  NO_AUTH: 'NO_AUTH',
+  UNKNOWN: 'UNKNOWN',
+};
+
+export const APIRoute = {
+  HOTELS: '/hotels',
+  LOGIN: '/login',
+  LOGOUT: '/logout',
+};

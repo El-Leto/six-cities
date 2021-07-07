@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ActionCreator } from '../../store/action';
 
-function CityItem({ item, city, changeCity, fillPlaceList }) {
+function CityItem({ item, city, changeCity }) {
 
   return (
     <li className="locations__item">
@@ -13,7 +13,6 @@ function CityItem({ item, city, changeCity, fillPlaceList }) {
       href="/#"
       onClick={() => {
         changeCity(item);
-        fillPlaceList(item);
       }}
       >
         <span>{item}</span>
@@ -26,7 +25,6 @@ CityItem.propTypes = {
   item: PropTypes.string.isRequired,
   city: PropTypes.string.isRequired,
   changeCity: PropTypes.func.isRequired,
-  fillPlaceList: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = ({ city }) => ({
@@ -35,7 +33,6 @@ const mapStateToProps = ({ city }) => ({
 
 const mapDispatchToProps = {
   changeCity: ActionCreator.changeCity,
-  fillPlaceList: ActionCreator.fillPlaceList,
 };
 
 export { CityItem };

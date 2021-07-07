@@ -1,5 +1,3 @@
-import hotels from '../mocks/hotels';
-import reviews from '../mocks/reviews';
 import {ActionType} from './action';
 
 const INITIAL_CITY = 'Paris';
@@ -7,9 +5,10 @@ const INITIAL_SITE_SORT = 'Popular';
 
 const initialState = {
   city: INITIAL_CITY,
-  hotels: hotels.filter(({ city }) => city.name === INITIAL_CITY),
-  reviews: reviews,
+  hotels: [],
+  reviews: [],
   activeSortType: INITIAL_SITE_SORT,
+  isDataLoaded: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -18,12 +17,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         city: action.payload,
-        activeSortType: INITIAL_SITE_SORT,
-      };
-    case ActionType.FILL_PLACE_LIST:
-      return {
-        ...state,
-        hotels: hotels.filter(({ city }) => city.name === action.payload),
         activeSortType: INITIAL_SITE_SORT,
       };
     case ActionType.SET_SORT_TYPE:
@@ -35,6 +28,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         hotels: action.payload,
+        isDataLoaded: true,
       };
     default:
       return state;

@@ -148,7 +148,7 @@ function RoomPage({ hotels, reviews }) {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount"></span></h2>
                 <ReviewsList reviews={reviews} />
                 <ReviewForm />
               </section>
@@ -178,9 +178,9 @@ RoomPage.propTypes = {
   reviews: PropTypes.arrayOf(reviewProp).isRequired,
 };
 
-const mapStateToProps = ({ hotels, city }) => ({
+const mapStateToProps = ({ hotels, reviews }) => ({
   hotels,
-  city,
+  reviews,
 });
 
 export { RoomPage };
