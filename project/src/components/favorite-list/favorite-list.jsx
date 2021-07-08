@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import hotelProp from '../app/hotel.prop';
 import FavoriteItem from '../favorite-item/favorite-item';
 
-function FavoriteList({ hotels }) {
-  const favoriteHotels = hotels.filter((hotel) => hotel.isFavorite);
+function FavoriteList({ favoriteHotels }) {
 
   const cities = [...new Set(favoriteHotels.map((hotel) => hotel.city.name))];
 
@@ -16,7 +15,7 @@ function FavoriteList({ hotels }) {
 }
 
 FavoriteList.propTypes = {
-  hotels: PropTypes.arrayOf(hotelProp).isRequired,
+  favoriteHotels: PropTypes.arrayOf(hotelProp).isRequired,
 };
 
 export default FavoriteList;

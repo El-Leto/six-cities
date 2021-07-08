@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Logo from '../logo/logo';
 import FavoriteList from '../favorite-list/favorite-list';
 import hotelProp from '../app/hotel.prop';
 
 function FavoritesPage(props) {
   const {hotels} = props;
+
+  const favoriteHotels = hotels.filter((hotel) => hotel.isFavorite);
 
   return (
 
@@ -38,7 +41,7 @@ function FavoritesPage(props) {
         <div className="page__favorites-container container">
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
-            <FavoriteList hotels={hotels} />
+            <FavoriteList favoriteHotels={favoriteHotels} />
           </section>
         </div>
       </main>
@@ -55,4 +58,9 @@ FavoritesPage.propTypes = {
   hotels: PropTypes.arrayOf(hotelProp).isRequired,
 };
 
-export default FavoritesPage;
+const mapStateToProps = ({ hotels }) => ({
+  hotels,
+});
+
+export { FavoritesPage };
+export default connect(mapStateToProps)(FavoritesPage);
