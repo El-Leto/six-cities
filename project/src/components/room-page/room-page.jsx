@@ -18,7 +18,10 @@ function RoomPage({ hotels, reviews }) {
   const location = useLocation();
 
   const hotel = hotels.find((item) => `/offer/${item.id}` === location.pathname);
-  const nearHotels = hotels.filter((item) => item.id !== hotel.id);
+
+  const otherHotels = hotels.filter((item) => item.id !== hotel.id);
+
+  const nearHotels = otherHotels.filter((item) => item.city.name === hotel.city.name);
 
   const [activeCard, setActiveCard] = useState(hotel);
 
@@ -155,7 +158,7 @@ function RoomPage({ hotels, reviews }) {
             </div>
           </div>
           <section className="property__map map">
-            <MapPage city={hotels[0].city} hotels={hotels} activeCard={activeCard} />
+            <MapPage city={hotels[0].city} hotels={nearHotels} activeCard={activeCard} />
           </section>
         </section>
         <div className="container">

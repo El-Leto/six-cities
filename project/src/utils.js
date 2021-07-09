@@ -24,21 +24,21 @@ const adaptToClient = (hotel) => {
     ...hotel,
     host: {
       ...hotel.host,
-      avatarUrl: hotel.host.avatar_url,
-      isPro: hotel.host.is_pro,
+      avatarUrl: hotel.host['avatar_url'],
+      isPro: hotel.host['is_pro'],
     },
-    isFavorite: hotel.is_favorite,
-    isPremium: hotel.is_premium,
-    maxAdults: hotel.max_adults,
-    previewImage: hotel.preview_image,
+    isFavorite: hotel['is_favorite'],
+    isPremium: hotel['is_premium'],
+    maxAdults: hotel['max_adults'],
+    previewImage: hotel['preview_image'],
   };
 
-  delete adaptedHotel.preview_image;
-  delete adaptedHotel.is_favorite;
-  delete adaptedHotel.is_premium;
-  delete adaptedHotel.max_adults;
-  delete adaptedHotel.host.is_pro;
-  delete adaptedHotel.host.avatar_url;
+  delete adaptedHotel['preview_image'];
+  delete adaptedHotel['is_favorite'];
+  delete adaptedHotel['is_premium'];
+  delete adaptedHotel['max_adults'];
+  delete adaptedHotel.host['is_pro'];
+  delete adaptedHotel.host['avatar_url'];
 
   return adaptedHotel;
 };
