@@ -8,7 +8,6 @@ const override = css`
 `;
 
 function LoadingScreen() {
-
   return (
     <DotLoader color={'#696969'} css={override} size={200} />
   );
