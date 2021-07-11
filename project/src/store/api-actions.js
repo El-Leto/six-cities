@@ -1,11 +1,11 @@
 import { ActionCreator } from './action';
 import { APIRoute, AuthorizationStatus, AppRoute } from '../const';
-import { adaptToClient } from '../utils';
+import { adaptHotelsToClient, adaptUserToClient } from '../utils';
 
 export const fetchHotelsList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.HOTELS)
     .then(({data}) => {
-      const hotels = data.map((hotel) => adaptToClient(hotel));
+      const hotels = data.map((hotel) => adaptHotelsToClient(hotel));
       return hotels;
     })
     .then((hotels) => dispatch(ActionCreator.loadHotels(hotels)))
@@ -13,8 +13,11 @@ export const fetchHotelsList = () => (dispatch, _getState, api) => (
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
-    .then(() => dispatch(ActionCreator.requiredAuthorization(AuthorizationStatus.AUTH)))
-    .catch(() => {})
+    .then(({data}) => {
+      dispatch(ActionCreator.setUser(adaptUserToClient(data)));
+      dispatch(ActionCreator.requiredAuthorization(AuthorizationStatus.AUTH));
+    })
+    .catch(() => dispatch(ActionCreator.requiredAuthorization(AuthorizationStatus.NO_AUTH)))
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (

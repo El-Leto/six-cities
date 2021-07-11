@@ -18,7 +18,7 @@ export const sortHotels = (sort, hotels) => {
   }
 };
 
-const adaptToClient = (hotel) => {
+const adaptHotelsToClient = (hotel) => {
 
   const adaptedHotel = {
     ...hotel,
@@ -43,4 +43,17 @@ const adaptToClient = (hotel) => {
   return adaptedHotel;
 };
 
-export { getRatingInPercent, adaptToClient };
+const adaptUserToClient = (user) => {
+  const adaptedUser = {
+    ...user,
+    avatarUrl: user['avatar_url'],
+    isPro: user['is_pro'],
+  };
+
+  delete adaptedUser['avatar_url'];
+  delete adaptedUser['is_pro'];
+
+  return adaptedUser;
+};
+
+export { getRatingInPercent, adaptHotelsToClient, adaptUserToClient };

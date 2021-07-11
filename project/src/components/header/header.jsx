@@ -8,6 +8,7 @@ import HeaderAuth from '../header-auth/header-auth';
 import HeaderGuest from '../header-guest/header-guest';
 
 function Header({ username, authorizationStatus, logoutApp }) {
+  console.log(username);
 
   return (
     <header className="header">
