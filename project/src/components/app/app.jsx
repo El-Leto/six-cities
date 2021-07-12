@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch, Route, BrowserRouter} from 'react-router-dom';
+import {Switch, Route, Router as BrowserRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {AppRoute} from '../../const';
@@ -9,11 +9,12 @@ import SingInPage from '../sing-in-page/sing-in-page';
 import FavoritesPage from '../favorites-page/favorites-page';
 import NotFoundPage from '../not-found-page/not-found-page';
 import LoadingScreen from '../loading-screen/loading-screen';
-import hotelProp from './hotel.prop';
+import PrivateRoute from '../private-route/private-route';
+import browserHistory from '../../browser-history';
 import reviewProp from './review.prop';
 
 function App(props) {
-  const {hotels, reviews, isDataLoaded} = props;
+  const {reviews, isDataLoaded} = props;
 
   if (!isDataLoaded) {
     return (
@@ -22,7 +23,7 @@ function App(props) {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter history={browserHistory}>
       <Switch>
         <Route exact path={AppRoute.MAIN}>
           <MainPage />
@@ -30,14 +31,14 @@ function App(props) {
         <Route exact path={AppRoute.SING_IN}>
           <SingInPage />
         </Route>
-        <Route exact path={AppRoute.FAVORITES}>
-          <FavoritesPage
-            hotels={hotels}
-          />
-        </Route>
+        <PrivateRoute
+          exact
+          path={AppRoute.FAVORITES}
+          render={() => <FavoritesPage />}
+        >
+        </PrivateRoute>
         <Route exact path={AppRoute.ROOM}>
           <RoomPage
-            hotels={hotels}
             reviews={reviews}
           />
         </Route>
@@ -50,7 +51,6 @@ function App(props) {
 }
 
 App.propTypes = {
-  hotels: PropTypes.arrayOf(hotelProp).isRequired,
   reviews: PropTypes.arrayOf(reviewProp).isRequired,
   isDataLoaded: PropTypes.bool.isRequired,
 };

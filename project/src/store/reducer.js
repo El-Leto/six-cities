@@ -1,4 +1,5 @@
-import {ActionType} from './action';
+import { ActionType } from './action';
+import { AuthorizationStatus } from '../const';
 
 const INITIAL_CITY = 'Paris';
 const INITIAL_SITE_SORT = 'Popular';
@@ -9,6 +10,8 @@ const initialState = {
   reviews: [],
   activeSortType: INITIAL_SITE_SORT,
   isDataLoaded: false,
+  authorizationStatus: AuthorizationStatus.UNKNOWN,
+  username: '',
 };
 
 const reducer = (state = initialState, action) => {
@@ -29,6 +32,22 @@ const reducer = (state = initialState, action) => {
         ...state,
         hotels: action.payload,
         isDataLoaded: true,
+      };
+    case ActionType.REQUIRED_AUTHORIZATION:
+      return {
+        ...state,
+        authorizationStatus: action.payload,
+      };
+    case ActionType.SET_USER:
+      return {
+        ...state,
+        username: action.payload.email,
+      };
+    case ActionType.LOGOUT:
+      return {
+        ...state,
+        username: '',
+        authorizationStatus: AuthorizationStatus.NO_AUTH,
       };
     default:
       return state;
