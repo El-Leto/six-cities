@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import { useLocation } from 'react-router-dom';
+import React, {useEffect} from 'react';
+import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import Header from '../header/header';
 import hotelProp from '../app/hotel.prop';
 import reviewProp from '../app/review.prop';
@@ -9,27 +9,12 @@ import ImageList from '../image-list/image-list';
 import PropertyList from '../property-list/property-list';
 import ReviewsList from '../reviews-list/reviews-list';
 import ReviewForm from '../review-form/review-form';
-import PlaceList from '../place-list/place-list';
-import MapPage from '../map-page/map-page';
+//import PlaceList from '../place-list/place-list';
+//import MapPage from '../map-page/map-page';
 import { getRatingInPercent } from '../../utils';
+import { fetchHotel } from '../../store/api-actions';
 
-function RoomPage({ hotels, reviews }) {
-
-  const location = useLocation();
-
-  const hotel = hotels.find((item) => `/offer/${item.id}` === location.pathname);
-
-  const otherHotels = hotels.filter((item) => item.id !== hotel.id);
-
-  const nearHotels = otherHotels.filter((item) => item.city.name === hotel.city.name);
-
-  const [activeCard, setActiveCard] = useState(hotel);
-
-  const onCardHover = (cardId) => {
-    const currentCard = hotels.find((offer) => offer.id === Number(cardId));
-    setActiveCard(currentCard);
-  };
-
+function RoomPage({ hotel, reviews }) {
   const {
     price,
     images,
@@ -42,6 +27,29 @@ function RoomPage({ hotels, reviews }) {
     maxAdults,
     goods,
   } = hotel;
+  console.log(hotel);
+
+  const dispatch = useDispatch();
+  const params = useParams();
+
+  useEffect(() => {
+    dispatch(fetchHotel(params.id));
+  }, [dispatch, params.id]);
+
+  // const location = useLocation();
+
+  // const hotel = hotels.find((item) => `/offer/${item.id}` === location.pathname);
+
+  // const otherHotels = hotels.filter((item) => item.id !== hotel.id);
+
+  // const nearHotels = otherHotels.filter((item) => item.city.name === hotel.city.name);
+
+  // const [activeCard, setActiveCard] = useState(hotel);
+
+  // const onCardHover = (cardId) => {
+  //   const currentCard = hotels.find((offer) => offer.id === Number(cardId));
+  //   setActiveCard(currentCard);
+  // };
 
   const placeRating = getRatingInPercent(rating);
 
@@ -135,17 +143,11 @@ function RoomPage({ hotels, reviews }) {
             </div>
           </div>
           <section className="property__map map">
-            <MapPage city={hotels[0].city} hotels={nearHotels} activeCard={activeCard} />
           </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <PlaceList
-              hotels={nearHotels}
-              onMouseEnter={onCardHover}
-              onMouseLeave={() => setActiveCard(hotel)}
-            />
           </section>
         </div>
       </main>
@@ -154,12 +156,12 @@ function RoomPage({ hotels, reviews }) {
 }
 
 RoomPage.propTypes = {
-  hotels: PropTypes.arrayOf(hotelProp).isRequired,
+  hotel: hotelProp,
   reviews: PropTypes.arrayOf(reviewProp).isRequired,
 };
 
-const mapStateToProps = ({ hotels, reviews }) => ({
-  hotels,
+const mapStateToProps = ({ hotel, reviews }) => ({
+  hotel,
   reviews,
 });
 

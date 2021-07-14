@@ -7,6 +7,7 @@ const INITIAL_SITE_SORT = 'Popular';
 const initialState = {
   city: INITIAL_CITY,
   hotels: [],
+  hotel: {},
   reviews: [],
   activeSortType: INITIAL_SITE_SORT,
   isDataLoaded: false,
@@ -31,6 +32,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         hotels: action.payload,
+        isDataLoaded: true,
+      };
+    case ActionType.LOAD_HOTEL:
+      return {
+        ...state,
+        hotel: action.payload,
         isDataLoaded: true,
       };
     case ActionType.REQUIRED_AUTHORIZATION:

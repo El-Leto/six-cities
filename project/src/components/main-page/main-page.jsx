@@ -11,8 +11,7 @@ import { SortHotels } from '../sort-hotels/sort-hotels';
 import { CITIES, SORTS } from '../../const';
 import { sortHotels } from '../../utils';
 
-function MainPage(props) {
-  const {hotels, city, activeSortType} = props;
+function MainPage({hotels, city, activeSortType}) {
 
   const [activeCard, setActiveCard] = useState({});
 

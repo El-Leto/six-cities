@@ -9,6 +9,23 @@ export const fetchHotelsList = () => (dispatch, _getState, api) => (
       return hotels;
     })
     .then((hotels) => dispatch(ActionCreator.loadHotels(hotels)))
+    //.catch(() => dispatch(ActionCreator.redirectToRoute(AppRoute.NOT_FOUND)))
+);
+
+export const fetchNearbyHotelsList = (id) => (dispatch, _getState, api) => (
+  api.get(`${APIRoute.HOTELS}/${id}/nearby`)
+    .then(({data}) => {
+      const hotels = data.map((hotel) => adaptHotelsToClient(hotel));
+      return hotels;
+    })
+    .then((hotels) => dispatch(ActionCreator.loadNearbyHotels(hotels)))
+    //.catch(() => dispatch(ActionCreator.redirectToRoute(AppRoute.NOT_FOUND)))
+);
+
+export const fetchHotel = (id) => (dispatch, _getState, api) => (
+  api.get(`${APIRoute.HOTELS}/${id}`)
+    .then(({data}) => dispatch(ActionCreator.loadHotel(adaptHotelsToClient(data))))
+    //.catch(() => dispatch(ActionCreator.redirectToRoute(AppRoute.NOT_FOUND)))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (

@@ -2,6 +2,8 @@ export const ActionType = {
   CHANGE_CITY: 'changeCity',
   SET_SORT_TYPE: 'setSortType',
   LOAD_HOTELS: 'loadHotels',
+  LOAD_HOTEL: 'loadHotel',
+  LOAD_NEARBY_HOTELS: 'loadNearbyHotels',
   REQUIRED_AUTHORIZATION: 'requiredAuthorization',
   LOGOUT: 'logout',
   REDIRECT_TO_ROUTE: 'redirectToRoute',
@@ -19,6 +21,14 @@ export const ActionCreator = {
   }),
   loadHotels: (hotels) => ({
     type: ActionType.LOAD_HOTELS,
+    payload: hotels,
+  }),
+  loadHotel: (hotel) => ({
+    type: ActionType.LOAD_HOTEL,
+    payload: hotel,
+  }),
+  loadNearby: (hotels) => ({
+    type: ActionType.LOAD_NEARBY,
     payload: hotels,
   }),
   requiredAuthorization: (status) => ({

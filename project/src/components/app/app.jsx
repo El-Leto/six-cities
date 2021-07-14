@@ -55,8 +55,7 @@ App.propTypes = {
   isDataLoaded: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = ({ hotels, reviews, isDataLoaded }) => ({
-  hotels,
+const mapStateToProps = ({ reviews, isDataLoaded }) => ({
   reviews,
   isDataLoaded,
 });
