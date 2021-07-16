@@ -1,14 +1,29 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { postReview } from '../../store/api-actions';
 
-function ReviewsForm() {
+function ReviewsForm({ id, sendReview }) {
   const [review, setReview] = useState({
     rating: '',
-    review: '',
+    comment: '',
   });
+
+  const newState = {
+    rating: '',
+    comment: '',
+  };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    sendReview(id, review);
+
+    setReview(newState);
   };
+
+  // useEffect(()=>{
+  //   console.log(review.rating);
+  // });
 
   return (
     <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit}>
@@ -49,7 +64,7 @@ function ReviewsForm() {
           </svg>
         </label>
       </div>
-      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onChange={(evt) => {setReview({...review, review: evt.target.value});}}></textarea>
+      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onChange={(evt) => {setReview({...review, comment: evt.target.value});}}></textarea>
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
@@ -60,4 +75,16 @@ function ReviewsForm() {
   );
 }
 
-export default ReviewsForm;
+ReviewsForm.propTypes = {
+  sendReview: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  sendReview(id, review) {
+    dispatch(postReview(id, review));
+  },
+});
+
+export { ReviewsForm };
+export default connect( null, mapDispatchToProps )(ReviewsForm);

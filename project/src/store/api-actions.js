@@ -36,6 +36,16 @@ export const fetchReviews = (id) => (dispatch, _getState, api) => (
     .then((reviews) => dispatch(ActionCreator.loadReviews(reviews)))
 );
 
+export const postReview = (id, review) => (dispatch, _getState, api) => (
+  api.post(`${APIRoute.REVIEWS}/${id}`, review)
+    //.then(() => dispatch(ActionCreator.loadReviews(true)))
+    .then(({data}) => {
+      const reviews = data.map((item) => adaptCommentToClient(item));
+      return reviews;
+    })
+    .then((reviews) => dispatch(ActionCreator.loadReviews(reviews)))
+);
+
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
     .then(({data}) => {

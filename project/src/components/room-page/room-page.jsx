@@ -12,9 +12,10 @@ import ReviewForm from '../review-form/review-form';
 import PlaceList from '../place-list/place-list';
 import MapPage from '../map-page/map-page';
 import { getRatingInPercent } from '../../utils';
+import { AuthorizationStatus } from '../../const';
 import { fetchHotel, fetchNearbyHotelsList, fetchReviews } from '../../store/api-actions';
 
-function RoomPage({ hotel, reviews, nearbyHotels }) {
+function RoomPage({ hotel, reviews, nearbyHotels, authorizationStatus }) {
   const {
     price,
     images,
@@ -125,7 +126,7 @@ function RoomPage({ hotel, reviews, nearbyHotels }) {
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount"></span></h2>
                 <ReviewsList reviews={reviews} />
-                <ReviewForm />
+                {authorizationStatus === AuthorizationStatus.AUTH && <ReviewForm id={params.id} />}
               </section>
             </div>
           </div>
@@ -148,12 +149,14 @@ RoomPage.propTypes = {
   hotel: hotelProp,
   reviews: PropTypes.arrayOf(reviewProp).isRequired,
   nearbyHotels: PropTypes.arrayOf(hotelProp).isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({ hotel, reviews, nearbyHotels }) => ({
+const mapStateToProps = ({ hotel, reviews, nearbyHotels, authorizationStatus }) => ({
   hotel,
   reviews,
   nearbyHotels,
+  authorizationStatus,
 });
 
 export { RoomPage };
