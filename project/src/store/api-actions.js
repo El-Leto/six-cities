@@ -1,6 +1,6 @@
 import { ActionCreator } from './action';
 import { APIRoute, AuthorizationStatus, AppRoute } from '../const';
-import { adaptHotelsToClient, adaptUserToClient } from '../utils';
+import { adaptHotelsToClient, adaptUserToClient, adaptCommentToClient } from '../utils';
 
 export const fetchHotelsList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.HOTELS)
@@ -24,7 +24,16 @@ export const fetchNearbyHotelsList = (id) => (dispatch, _getState, api) => (
 export const fetchHotel = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.HOTELS}/${id}`)
     .then(({data}) => dispatch(ActionCreator.loadHotel(adaptHotelsToClient(data))))
-    //.catch(() => dispatch(ActionCreator.redirectToRoute(AppRoute.NOT_FOUND)))
+    .catch(() => dispatch(ActionCreator.redirectToRoute(AppRoute.NOT_FOUND)))
+);
+
+export const fetchReviews = (id) => (dispatch, _getState, api) => (
+  api.get(`${APIRoute.REVIEWS}/${id}`)
+    .then(({data}) => {
+      const reviews = data.map((review) => adaptCommentToClient(review));
+      return reviews;
+    })
+    .then((reviews) => dispatch(ActionCreator.loadReviews(reviews)))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (

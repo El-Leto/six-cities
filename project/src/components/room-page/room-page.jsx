@@ -12,7 +12,7 @@ import ReviewForm from '../review-form/review-form';
 import PlaceList from '../place-list/place-list';
 import MapPage from '../map-page/map-page';
 import { getRatingInPercent } from '../../utils';
-import { fetchHotel, fetchNearbyHotelsList } from '../../store/api-actions';
+import { fetchHotel, fetchNearbyHotelsList, fetchReviews } from '../../store/api-actions';
 
 function RoomPage({ hotel, reviews, nearbyHotels }) {
   const {
@@ -35,6 +35,7 @@ function RoomPage({ hotel, reviews, nearbyHotels }) {
   useEffect(() => {
     dispatch(fetchHotel(params.id));
     dispatch(fetchNearbyHotelsList(params.id));
+    dispatch(fetchReviews(params.id));
   }, [dispatch, params.id]);
 
   const placeRating = getRatingInPercent(rating);

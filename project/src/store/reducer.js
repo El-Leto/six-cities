@@ -46,6 +46,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         nearbyHotels: action.payload,
       };
+    case ActionType.LOAD_REVIEWS:
+      return {
+        ...state,
+        reviews: action.payload,
+      };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {
         ...state,

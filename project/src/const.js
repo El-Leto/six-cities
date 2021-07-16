@@ -3,6 +3,7 @@ export const AppRoute = {
   SING_IN: '/login',
   FAVORITES: '/favorites',
   ROOM: '/offer/:id',
+  NOT_FOUND: '/404',
 };
 
 export const PlaceType = {
@@ -64,6 +65,7 @@ export const AuthorizationStatus = {
 
 export const APIRoute = {
   HOTELS: '/hotels',
+  REVIEWS: '/comments',
   LOGIN: '/login',
   LOGOUT: '/logout',
 };

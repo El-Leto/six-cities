@@ -4,6 +4,7 @@ export const ActionType = {
   LOAD_HOTELS: 'loadHotels',
   LOAD_HOTEL: 'loadHotel',
   LOAD_NEARBY_HOTELS: 'loadNearbyHotels',
+  LOAD_REVIEWS: 'loadReviews',
   REQUIRED_AUTHORIZATION: 'requiredAuthorization',
   LOGOUT: 'logout',
   REDIRECT_TO_ROUTE: 'redirectToRoute',
@@ -30,6 +31,10 @@ export const ActionCreator = {
   loadNearbyHotels: (hotels) => ({
     type: ActionType.LOAD_NEARBY_HOTELS,
     payload: hotels,
+  }),
+  loadReviews: (reviews) => ({
+    type: ActionType.LOAD_REVIEWS,
+    payload: reviews,
   }),
   requiredAuthorization: (status) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,
