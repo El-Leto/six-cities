@@ -8,7 +8,6 @@ export const AppRoute = {
 export const PlaceType = {
   MAIN: 'MAIN',
   FAVORITES: 'FAVORITES',
-  NEAR_PLACES: 'NEAR_PLACES',
 };
 
 export const placeCardType = {

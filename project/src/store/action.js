@@ -27,8 +27,8 @@ export const ActionCreator = {
     type: ActionType.LOAD_HOTEL,
     payload: hotel,
   }),
-  loadNearby: (hotels) => ({
-    type: ActionType.LOAD_NEARBY,
+  loadNearbyHotels: (hotels) => ({
+    type: ActionType.LOAD_NEARBY_HOTELS,
     payload: hotels,
   }),
   requiredAuthorization: (status) => ({

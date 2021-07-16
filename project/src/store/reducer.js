@@ -13,6 +13,7 @@ const initialState = {
   isDataLoaded: false,
   authorizationStatus: AuthorizationStatus.UNKNOWN,
   username: '',
+  nearbyHotels: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -39,6 +40,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         hotel: action.payload,
         isDataLoaded: true,
+      };
+    case ActionType.LOAD_NEARBY_HOTELS:
+      return {
+        ...state,
+        nearbyHotels: action.payload,
       };
     case ActionType.REQUIRED_AUTHORIZATION:
       return {
