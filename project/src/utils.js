@@ -56,4 +56,20 @@ const adaptUserToClient = (user) => {
   return adaptedUser;
 };
 
-export { getRatingInPercent, adaptHotelsToClient, adaptUserToClient };
+const adaptCommentToClient = (review) => {
+  const adaptedComment = {
+    ...review,
+    user: {
+      ...review.user,
+      isPro: review.user['is_pro'],
+      avatarUrl: review.user.avatar_url,
+    },
+  };
+
+  delete adaptedComment.user['avatar_url'];
+  delete adaptedComment.user['is_pro'];
+
+  return adaptedComment;
+};
+
+export { getRatingInPercent, adaptHotelsToClient, adaptUserToClient, adaptCommentToClient };

@@ -2,6 +2,9 @@ export const ActionType = {
   CHANGE_CITY: 'changeCity',
   SET_SORT_TYPE: 'setSortType',
   LOAD_HOTELS: 'loadHotels',
+  LOAD_HOTEL: 'loadHotel',
+  LOAD_NEARBY_HOTELS: 'loadNearbyHotels',
+  LOAD_REVIEWS: 'loadReviews',
   REQUIRED_AUTHORIZATION: 'requiredAuthorization',
   LOGOUT: 'logout',
   REDIRECT_TO_ROUTE: 'redirectToRoute',
@@ -20,6 +23,18 @@ export const ActionCreator = {
   loadHotels: (hotels) => ({
     type: ActionType.LOAD_HOTELS,
     payload: hotels,
+  }),
+  loadHotel: (hotel) => ({
+    type: ActionType.LOAD_HOTEL,
+    payload: hotel,
+  }),
+  loadNearbyHotels: (hotels) => ({
+    type: ActionType.LOAD_NEARBY_HOTELS,
+    payload: hotels,
+  }),
+  loadReviews: (reviews) => ({
+    type: ActionType.LOAD_REVIEWS,
+    payload: reviews,
   }),
   requiredAuthorization: (status) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,

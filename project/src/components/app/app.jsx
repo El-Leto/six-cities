@@ -11,10 +11,9 @@ import NotFoundPage from '../not-found-page/not-found-page';
 import LoadingScreen from '../loading-screen/loading-screen';
 import PrivateRoute from '../private-route/private-route';
 import browserHistory from '../../browser-history';
-import reviewProp from './review.prop';
 
 function App(props) {
-  const {reviews, isDataLoaded} = props;
+  const { isDataLoaded } = props;
 
   if (!isDataLoaded) {
     return (
@@ -38,9 +37,7 @@ function App(props) {
         >
         </PrivateRoute>
         <Route exact path={AppRoute.ROOM}>
-          <RoomPage
-            reviews={reviews}
-          />
+          <RoomPage />
         </Route>
         <Route>
           <NotFoundPage />
@@ -51,13 +48,10 @@ function App(props) {
 }
 
 App.propTypes = {
-  reviews: PropTypes.arrayOf(reviewProp).isRequired,
   isDataLoaded: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = ({ hotels, reviews, isDataLoaded }) => ({
-  hotels,
-  reviews,
+const mapStateToProps = ({ isDataLoaded }) => ({
   isDataLoaded,
 });
 

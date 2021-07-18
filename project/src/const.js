@@ -3,12 +3,12 @@ export const AppRoute = {
   SING_IN: '/login',
   FAVORITES: '/favorites',
   ROOM: '/offer/:id',
+  NOT_FOUND: '/404',
 };
 
 export const PlaceType = {
   MAIN: 'MAIN',
   FAVORITES: 'FAVORITES',
-  NEAR_PLACES: 'NEAR_PLACES',
 };
 
 export const placeCardType = {
@@ -65,6 +65,12 @@ export const AuthorizationStatus = {
 
 export const APIRoute = {
   HOTELS: '/hotels',
+  REVIEWS: '/comments',
   LOGIN: '/login',
   LOGOUT: '/logout',
+};
+
+export const CommentLength = {
+  MIN: 50,
+  MAX: 300,
 };

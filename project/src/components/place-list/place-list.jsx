@@ -4,7 +4,7 @@ import hotelProp from '../app/hotel.prop';
 import PlaceCard from '../place-card/place-card';
 import { PlaceType } from '../../const';
 
-function PlaceList({ hotels, onMouseEnter, onMouseLeave, isMainPage = false }) {
+function PlaceList({ hotels, onMouseEnter = () => {}, onMouseLeave = () => {}, isMainPage = false }) {
 
   return (
     <div className={isMainPage
@@ -17,7 +17,7 @@ function PlaceList({ hotels, onMouseEnter, onMouseLeave, isMainPage = false }) {
           hotel={place}
           placeType={PlaceType.MAIN}
           onMouseEnter={() => onMouseEnter(place.id)}
-          onMouseLeave={onMouseLeave}
+          onMouseLeave={() => onMouseLeave(null)}
         />))}
     </div>
   );

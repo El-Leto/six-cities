@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import Header from '../header/header';
 import hotelProp from '../app/hotel.prop';
 import reviewProp from '../app/review.prop';
@@ -12,24 +12,10 @@ import ReviewForm from '../review-form/review-form';
 import PlaceList from '../place-list/place-list';
 import MapPage from '../map-page/map-page';
 import { getRatingInPercent } from '../../utils';
+import { AuthorizationStatus } from '../../const';
+import { fetchHotel, fetchNearbyHotelsList, fetchReviews } from '../../store/api-actions';
 
-function RoomPage({ hotels, reviews }) {
-
-  const location = useLocation();
-
-  const hotel = hotels.find((item) => `/offer/${item.id}` === location.pathname);
-
-  const otherHotels = hotels.filter((item) => item.id !== hotel.id);
-
-  const nearHotels = otherHotels.filter((item) => item.city.name === hotel.city.name);
-
-  const [activeCard, setActiveCard] = useState(hotel);
-
-  const onCardHover = (cardId) => {
-    const currentCard = hotels.find((offer) => offer.id === Number(cardId));
-    setActiveCard(currentCard);
-  };
-
+function RoomPage({ hotel, reviews, nearbyHotels, authorizationStatus }) {
   const {
     price,
     images,
@@ -41,7 +27,17 @@ function RoomPage({ hotels, reviews }) {
     bedrooms,
     maxAdults,
     goods,
+    city,
   } = hotel;
+
+  const dispatch = useDispatch();
+  const params = useParams();
+
+  useEffect(() => {
+    dispatch(fetchHotel(params.id));
+    dispatch(fetchNearbyHotelsList(params.id));
+    dispatch(fetchReviews(params.id));
+  }, [dispatch, params.id]);
 
   const placeRating = getRatingInPercent(rating);
 
@@ -53,7 +49,7 @@ function RoomPage({ hotels, reviews }) {
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
-            <ImageList images={images}/>
+            {images && <ImageList images={images}/>}
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
@@ -103,7 +99,7 @@ function RoomPage({ hotels, reviews }) {
               </div>
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
-                <PropertyList goods={goods} />
+                {goods && <PropertyList goods={goods} />}
               </div>
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
@@ -130,22 +126,18 @@ function RoomPage({ hotels, reviews }) {
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount"></span></h2>
                 <ReviewsList reviews={reviews} />
-                <ReviewForm />
+                {authorizationStatus === AuthorizationStatus.AUTH && <ReviewForm id={params.id} />}
               </section>
             </div>
           </div>
           <section className="property__map map">
-            <MapPage city={hotels[0].city} hotels={nearHotels} activeCard={activeCard} />
+            {city && <MapPage city={city} hotels={[hotel, ...nearbyHotels]} activeCard={hotel} />}
           </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <PlaceList
-              hotels={nearHotels}
-              onMouseEnter={onCardHover}
-              onMouseLeave={() => setActiveCard(hotel)}
-            />
+            <PlaceList hotels={nearbyHotels} />
           </section>
         </div>
       </main>
@@ -154,13 +146,17 @@ function RoomPage({ hotels, reviews }) {
 }
 
 RoomPage.propTypes = {
-  hotels: PropTypes.arrayOf(hotelProp).isRequired,
+  hotel: hotelProp,
   reviews: PropTypes.arrayOf(reviewProp).isRequired,
+  nearbyHotels: PropTypes.arrayOf(hotelProp),
+  authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({ hotels, reviews }) => ({
-  hotels,
+const mapStateToProps = ({ hotel, reviews, nearbyHotels, authorizationStatus }) => ({
+  hotel,
   reviews,
+  nearbyHotels,
+  authorizationStatus,
 });
 
 export { RoomPage };
