@@ -69,3 +69,8 @@ export const APIRoute = {
   LOGIN: '/login',
   LOGOUT: '/logout',
 };
+
+export const CommentLength = {
+  MIN: 50,
+  MAX: 300,
+};

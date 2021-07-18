@@ -21,7 +21,7 @@ function HeaderAuth({ username, logoutApp }) {
               evt.preventDefault();
               logoutApp();
             }}
-            to={AppRoute.ROOT}
+            to={AppRoute.MAIN}
           >
             <span className="header__signout">Sign out</span>
           </Link>

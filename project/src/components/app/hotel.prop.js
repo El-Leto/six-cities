@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 
 export default PropTypes.shape({
-  bedrooms: PropTypes.number.isRequired,
+  bedrooms: PropTypes.number,
   city: PropTypes.shape({
     location: PropTypes.shape({
       latitude: PropTypes.number.isRequired,
@@ -9,32 +9,32 @@ export default PropTypes.shape({
       zoom: PropTypes.number.isRequired,
     }).isRequired,
     name: PropTypes.string.isRequired,
-  }).isRequired,
-  description: PropTypes.string.isRequired,
+  }),
+  description: PropTypes.string,
   goods: PropTypes.arrayOf(
     PropTypes.string.isRequired,
-  ).isRequired,
+  ),
   host: PropTypes.shape({
     avatarUrl: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
     isPro: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
-  }).isRequired,
-  id: PropTypes.number.isRequired,
+  }),
+  id: PropTypes.number,
   images: PropTypes.arrayOf(
     PropTypes.string.isRequired,
-  ).isRequired,
-  isFavorite: PropTypes.bool.isRequired,
-  isPremium: PropTypes.bool.isRequired,
+  ),
+  isFavorite: PropTypes.bool,
+  isPremium: PropTypes.bool,
   location: PropTypes.shape({
     latitude: PropTypes.number.isRequired,
     longitude: PropTypes.number.isRequired,
     zoom: PropTypes.number.isRequired,
-  }).isRequired,
-  maxAdults: PropTypes.number.isRequired,
-  previewImage: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  rating: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-}).isRequired;
+  }),
+  maxAdults: PropTypes.number,
+  previewImage: PropTypes.string,
+  price: PropTypes.number,
+  rating: PropTypes.number,
+  title: PropTypes.string,
+  type: PropTypes.string,
+});

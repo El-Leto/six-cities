@@ -148,7 +148,7 @@ function RoomPage({ hotel, reviews, nearbyHotels, authorizationStatus }) {
 RoomPage.propTypes = {
   hotel: hotelProp,
   reviews: PropTypes.arrayOf(reviewProp).isRequired,
-  nearbyHotels: PropTypes.arrayOf(hotelProp).isRequired,
+  nearbyHotels: PropTypes.arrayOf(hotelProp),
   authorizationStatus: PropTypes.string.isRequired,
 };
 
