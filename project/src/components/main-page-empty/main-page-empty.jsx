@@ -1,13 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Header from '../header/header';
 import CityList from '../city-list/city-list';
 import { CITIES } from '../../const';
 import { getCity } from '../../store/process/selectors';
 
-function MainPageEmpty(props) {
-  const {city} = props;
+function MainPageEmpty() {
+  const city = useSelector(getCity);
 
   return (
 
@@ -37,13 +36,4 @@ function MainPageEmpty(props) {
   );
 }
 
-MainPageEmpty.propTypes = {
-  city: PropTypes.string.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  city: getCity(state),
-});
-
-export { MainPageEmpty };
-export default connect(mapStateToProps)(MainPageEmpty);
+export default MainPageEmpty;

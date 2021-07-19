@@ -1,10 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { connect, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Header from '../header/header';
-import hotelProp from '../app/hotel.prop';
-import reviewProp from '../app/review.prop';
 import ImageList from '../image-list/image-list';
 import PropertyList from '../property-list/property-list';
 import ReviewsList from '../reviews-list/reviews-list';
@@ -17,7 +14,13 @@ import { fetchHotel, fetchNearbyHotelsList, fetchReviews } from '../../store/api
 import { getHotel, getReviews, getNearbyHotels } from '../../store/data/selectors';
 import { getAuthorizationStatus } from '../../store/user/selectors';
 
-function RoomPage({ hotel, reviews, nearbyHotels, authorizationStatus }) {
+function RoomPage() {
+
+  const hotel = useSelector(getHotel);
+  const reviews = useSelector(getReviews);
+  const nearbyHotels = useSelector(getNearbyHotels);
+  const authorizationStatus = useSelector(getAuthorizationStatus);
+
   const {
     price,
     images,
@@ -147,19 +150,4 @@ function RoomPage({ hotel, reviews, nearbyHotels, authorizationStatus }) {
   );
 }
 
-RoomPage.propTypes = {
-  hotel: hotelProp,
-  reviews: PropTypes.arrayOf(reviewProp).isRequired,
-  nearbyHotels: PropTypes.arrayOf(hotelProp),
-  authorizationStatus: PropTypes.string.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  hotel: getHotel(state),
-  reviews: getReviews(state),
-  nearbyHotels: getNearbyHotels(state),
-  authorizationStatus: getAuthorizationStatus(state),
-});
-
-export { RoomPage };
-export default connect(mapStateToProps)(RoomPage);
+export default RoomPage;

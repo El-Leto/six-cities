@@ -1,7 +1,6 @@
 import React from 'react';
 import { Switch, Route, Router as BrowserRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { AppRoute } from '../../const';
 import MainPage from '../main-page/main-page';
 import RoomPage from '../room-page/room-page';
@@ -13,8 +12,8 @@ import PrivateRoute from '../private-route/private-route';
 import browserHistory from '../../browser-history';
 import { getLoadedDataStatus } from '../../store/data/selectors';
 
-function App(props) {
-  const { isDataLoaded } = props;
+function App() {
+  const isDataLoaded = useSelector(getLoadedDataStatus);
 
   if (!isDataLoaded) {
     return (
@@ -48,14 +47,4 @@ function App(props) {
   );
 }
 
-App.propTypes = {
-  isDataLoaded: PropTypes.bool.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  isDataLoaded: getLoadedDataStatus(state),
-});
-
-
-export { App };
-export default connect(mapStateToProps)(App);
+export default App;
