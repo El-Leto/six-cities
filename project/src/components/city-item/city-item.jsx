@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { ActionCreator } from '../../store/action';
+import { changeCity as  replaceCity} from '../../store/action';
 
 function CityItem({ item, city, changeCity }) {
 
@@ -32,7 +32,7 @@ const mapStateToProps = ({ city }) => ({
 });
 
 const mapDispatchToProps = {
-  changeCity: ActionCreator.changeCity,
+  changeCity: replaceCity,
 };
 
 export { CityItem };

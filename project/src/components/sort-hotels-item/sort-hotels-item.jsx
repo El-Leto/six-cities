@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { ActionCreator } from '../../store/action';
+import { setSortType as changeSortType } from '../../store/action';
 
 function SortHotelsItem({ item, setSortType, activeSortType }) {
 
@@ -30,7 +30,7 @@ SortHotelsItem.propTypes = {
 };
 
 const mapDispatchToProps = {
-  setSortType: ActionCreator.setSortType,
+  setSortType: changeSortType,
 };
 
 export { SortHotelsItem };
