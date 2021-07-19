@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { setSortType as changeSortType } from '../../store/action';
 import SortHotelsItem from '../sort-hotels-item/sort-hotels-item';
+import { getActiveSortTypes } from '../../store/process/selectors';
 
 function SortHotels({ sortTypes, activeSortType }) {
 
@@ -27,8 +28,8 @@ SortHotels.propTypes = {
   activeSortType: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({ activeSortType }) => ({
-  activeSortType,
+const mapStateToProps = (state) => ({
+  activeSortType: getActiveSortTypes(state),
 });
 
 const mapDispatchToProps = {

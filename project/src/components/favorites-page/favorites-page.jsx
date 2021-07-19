@@ -5,6 +5,7 @@ import FavoritesWrapper from '../favorites-wrapper/favorites-wrapper';
 import FavoritesEmptyWrapper from '../favorites-empty-wrapper/favorites-empty-wrapper';
 import Header from '../header/header';
 import hotelProp from '../app/hotel.prop';
+import { getHotels } from '../../store/data/selectors';
 
 function FavoritesPage(props) {
   const {hotels} = props;
@@ -33,8 +34,8 @@ FavoritesPage.propTypes = {
   hotels: PropTypes.arrayOf(hotelProp).isRequired,
 };
 
-const mapStateToProps = ({ hotels }) => ({
-  hotels,
+const mapStateToProps = (state) => ({
+  hotels: getHotels(state),
 });
 
 export { FavoritesPage };

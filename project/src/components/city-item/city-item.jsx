@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { changeCity as  replaceCity} from '../../store/action';
+import { getCity } from '../../store/process/selectors';
 
 function CityItem({ item, city, changeCity }) {
 
@@ -27,8 +28,8 @@ CityItem.propTypes = {
   changeCity: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({ city }) => ({
-  city,
+const mapStateToProps = (state) => ({
+  city: getCity(state),
 });
 
 const mapDispatchToProps = {

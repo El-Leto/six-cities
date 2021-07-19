@@ -6,6 +6,7 @@ import { AuthorizationStatus } from '../../const';
 import { logout } from '../../store/api-actions';
 import HeaderAuth from '../header-auth/header-auth';
 import HeaderGuest from '../header-guest/header-guest';
+import { getAuthorizationStatus, getUsername } from '../../store/user/selectors';
 
 function Header({ username, authorizationStatus, logoutApp }) {
 
@@ -38,8 +39,8 @@ Header.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
-  username: state.username,
+  authorizationStatus: getAuthorizationStatus(state),
+  username: getUsername(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

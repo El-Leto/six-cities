@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Header from '../header/header';
 import CityList from '../city-list/city-list';
 import { CITIES } from '../../const';
+import { getCity } from '../../store/process/selectors';
 
 function MainPageEmpty(props) {
   const {city} = props;
@@ -40,8 +41,8 @@ MainPageEmpty.propTypes = {
   city: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({ city }) => ({
-  city,
+const mapStateToProps = (state) => ({
+  city: getCity(state),
 });
 
 export { MainPageEmpty };

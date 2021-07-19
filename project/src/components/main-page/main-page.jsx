@@ -10,6 +10,8 @@ import CityList from '../city-list/city-list';
 import { SortHotels } from '../sort-hotels/sort-hotels';
 import { CITIES, SORTS } from '../../const';
 import { sortHotels } from '../../utils';
+import { getCity, getActiveSortTypes } from '../../store/process/selectors';
+import { getHotels } from '../../store/data/selectors';
 
 function MainPage({hotels, city, activeSortType}) {
 
@@ -69,10 +71,10 @@ MainPage.propTypes = {
   activeSortType: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({ hotels, city, activeSortType }) => ({
-  hotels,
-  city,
-  activeSortType,
+const mapStateToProps = (state) => ({
+  hotels: getHotels(state),
+  city: getCity(state),
+  activeSortType: getActiveSortTypes(state),
 });
 
 export { MainPage };

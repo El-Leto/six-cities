@@ -19,5 +19,4 @@ function FavoritesEmptyWrapper() {
   );
 }
 
-
 export default FavoritesEmptyWrapper;

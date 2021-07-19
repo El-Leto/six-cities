@@ -14,6 +14,8 @@ import MapPage from '../map-page/map-page';
 import { getRatingInPercent } from '../../utils';
 import { AuthorizationStatus } from '../../const';
 import { fetchHotel, fetchNearbyHotelsList, fetchReviews } from '../../store/api-actions';
+import { getHotel, getReviews, getNearbyHotels } from '../../store/data/selectors';
+import { getAuthorizationStatus } from '../../store/user/selectors';
 
 function RoomPage({ hotel, reviews, nearbyHotels, authorizationStatus }) {
   const {
@@ -152,11 +154,11 @@ RoomPage.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({ hotel, reviews, nearbyHotels, authorizationStatus }) => ({
-  hotel,
-  reviews,
-  nearbyHotels,
-  authorizationStatus,
+const mapStateToProps = (state) => ({
+  hotel: getHotel(state),
+  reviews: getReviews(state),
+  nearbyHotels: getNearbyHotels(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 export { RoomPage };
