@@ -1,4 +1,5 @@
-import { ActionType } from '../action';
+import { createReducer } from '@reduxjs/toolkit';
+import { loadHotels, loadHotel, loadNearbyHotels, loadReviews } from '../action';
 
 const initialState = {
   hotels: [],
@@ -8,33 +9,22 @@ const initialState = {
   nearbyHotels: [],
 };
 
-const data = (state = initialState, action) => {
-  switch (action.type) {
-    case ActionType.LOAD_HOTELS:
-      return {
-        ...state,
-        hotels: action.payload,
-        isDataLoaded: true,
-      };
-    case ActionType.LOAD_HOTEL:
-      return {
-        ...state,
-        hotel: action.payload,
-        isDataLoaded: true,
-      };
-    case ActionType.LOAD_NEARBY_HOTELS:
-      return {
-        ...state,
-        nearbyHotels: action.payload,
-      };
-    case ActionType.LOAD_REVIEWS:
-      return {
-        ...state,
-        reviews: action.payload,
-      };
-    default:
-      return state;
-  }
-};
+const data = createReducer(initialState, (builder) => {
+  builder
+    .addCase(loadHotels, (state, action) => {
+      state.isDataLoaded = true;
+      state.hotels = action.payload;
+    })
+    .addCase(loadHotel, (state, action) => {
+      state.isDataLoaded = true;
+      state.hotel = action.payload;
+    })
+    .addCase(loadNearbyHotels, (state, action) => {
+      state.nearbyHotels = action.payload;
+    })
+    .addCase(loadReviews, (state, action) => {
+      state.reviews = action.payload;
+    });
+});
 
 export { data };

@@ -1,3 +1,5 @@
+import { createAction } from '@reduxjs/toolkit';
+
 export const ActionType = {
   CHANGE_CITY: 'changeCity',
   SET_SORT_TYPE: 'setSortType',
@@ -11,50 +13,40 @@ export const ActionType = {
   SET_USER: 'setUser',
 };
 
-export const changeCity = (city) => ({
-  type: ActionType.CHANGE_CITY,
+export const changeCity = createAction(ActionType.CHANGE_CITY, (city) => ({
   payload: city,
-});
+}));
 
-export const setSortType = (sort) => ({
-  type: ActionType.SET_SORT_TYPE,
+export const setSortType = createAction(ActionType.SET_SORT_TYPE, (sort) => ({
   payload: sort,
-});
+}));
 
-export const loadHotels = (hotels) => ({
-  type: ActionType.LOAD_HOTELS,
+export const loadHotels = createAction(ActionType.LOAD_HOTELS, (hotels) => ({
   payload: hotels,
-});
+}));
 
-export const loadHotel = (hotel) => ({
-  type: ActionType.LOAD_HOTEL,
+export const loadHotel = createAction(ActionType.LOAD_HOTEL, (hotel) => ({
   payload: hotel,
-});
+}));
 
-export const loadNearbyHotels = (hotels) => ({
-  type: ActionType.LOAD_NEARBY_HOTELS,
+export const loadNearbyHotels = createAction(ActionType.LOAD_NEARBY_HOTELS, (hotels) => ({
   payload: hotels,
-});
+}));
 
-export const loadReviews = (reviews) => ({
-  type: ActionType.LOAD_REVIEWS,
+export const loadReviews = createAction(ActionType.LOAD_REVIEWS, (reviews) => ({
   payload: reviews,
-});
+}));
 
-export const requiredAuthorization = (status) => ({
-  type: ActionType.REQUIRED_AUTHORIZATION,
+export const requiredAuthorization = createAction(ActionType.REQUIRED_AUTHORIZATION, (status) => ({
   payload: status,
-});
+}));
 
-export const logout = () => ({
-  type: ActionType.LOGOUT,
-});
+export const logout = createAction(ActionType.LOGOUT);
 
-export const redirectToRoute = (url) => ({
-  type: ActionType.REDIRECT_TO_ROUTE,
+export const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE, (url) => ({
   payload: url,
-});
-export const setUser = (userData) => ({
-  type: ActionType.SET_USER,
+}));
+
+export const setUser = createAction(ActionType.SET_USER, (userData) => ({
   payload: userData,
-});
+}));
