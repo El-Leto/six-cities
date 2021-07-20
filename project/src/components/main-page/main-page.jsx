@@ -1,17 +1,21 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import PlaceList from '../place-list/place-list';
 import Header from '../header/header';
 import MapPage from '../map-page/map-page';
 import MainPageEmpty from '../main-page-empty/main-page-empty';
-import hotelProp from '../app/hotel.prop';
 import CityList from '../city-list/city-list';
-import { SortHotels } from '../sort-hotels/sort-hotels';
+import SortHotels from '../sort-hotels/sort-hotels';
 import { CITIES, SORTS } from '../../const';
 import { sortHotels } from '../../utils';
+import { getCity, getActiveSortTypes } from '../../store/process/selectors';
+import { getHotels } from '../../store/data/selectors';
 
-function MainPage({hotels, city, activeSortType}) {
+function MainPage() {
+
+  const hotels = useSelector(getHotels);
+  const city = useSelector(getCity);
+  const activeSortType = useSelector(getActiveSortTypes);
 
   const [activeCard, setActiveCard] = useState({});
 
@@ -45,7 +49,7 @@ function MainPage({hotels, city, activeSortType}) {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{hotels.length} places to stay in {city}</b>
-              <SortHotels sortTypes={SORTS} activeSortType={activeSortType}/>
+              <SortHotels sortTypes={SORTS} />
               <PlaceList
                 isMainPage
                 hotels={sortedByCityHotels}
@@ -63,17 +67,4 @@ function MainPage({hotels, city, activeSortType}) {
   );
 }
 
-MainPage.propTypes = {
-  hotels: PropTypes.arrayOf(hotelProp).isRequired,
-  city: PropTypes.string.isRequired,
-  activeSortType: PropTypes.string.isRequired,
-};
-
-const mapStateToProps = ({ hotels, city, activeSortType }) => ({
-  hotels,
-  city,
-  activeSortType,
-});
-
-export { MainPage };
-export default connect(mapStateToProps)(MainPage);
+export default MainPage;

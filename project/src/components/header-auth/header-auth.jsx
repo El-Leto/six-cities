@@ -2,8 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import { useDispatch } from 'react-redux';
 
 function HeaderAuth({ username, logoutApp }) {
+
+  const dispatch = useDispatch();
+
   return (
     <nav className="header__nav">
       <ul className="header__nav-list">
@@ -19,7 +23,7 @@ function HeaderAuth({ username, logoutApp }) {
             className="header__nav-link"
             onClick={(evt) => {
               evt.preventDefault();
-              logoutApp();
+              dispatch(logoutApp());
             }}
             to={AppRoute.MAIN}
           >
@@ -32,7 +36,7 @@ function HeaderAuth({ username, logoutApp }) {
 }
 
 HeaderAuth.propTypes = {
-  logoutApp: PropTypes.func.isRequired,
+  logoutApp: PropTypes.object.isRequired,
   username: PropTypes.string.isRequired,
 };
 

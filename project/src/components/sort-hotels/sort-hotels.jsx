@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { ActionCreator } from '../../store/action';
+import { useSelector } from 'react-redux';
 import SortHotelsItem from '../sort-hotels-item/sort-hotels-item';
+import { getActiveSortTypes } from '../../store/process/selectors';
 
-function SortHotels({ sortTypes, activeSortType }) {
+function SortHotels({ sortTypes }) {
+
+  const activeSortType = useSelector(getActiveSortTypes);
 
   return (
     <form className="places__sorting" action="#" method="get">
@@ -24,16 +26,6 @@ function SortHotels({ sortTypes, activeSortType }) {
 
 SortHotels.propTypes = {
   sortTypes: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  activeSortType: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = ({ activeSortType }) => ({
-  activeSortType,
-});
-
-const mapDispatchToProps = {
-  setSortType: ActionCreator.setSortType,
-};
-
-export { SortHotels };
-export default connect(mapStateToProps, mapDispatchToProps)(SortHotels);
+export default SortHotels;

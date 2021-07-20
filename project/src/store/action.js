@@ -1,3 +1,5 @@
+import { createAction } from '@reduxjs/toolkit';
+
 export const ActionType = {
   CHANGE_CITY: 'changeCity',
   SET_SORT_TYPE: 'setSortType',
@@ -11,44 +13,40 @@ export const ActionType = {
   SET_USER: 'setUser',
 };
 
-export const ActionCreator = {
-  changeCity: (city) => ({
-    type: ActionType.CHANGE_CITY,
-    payload: city,
-  }),
-  setSortType: (sort) => ({
-    type: ActionType.SET_SORT_TYPE,
-    payload: sort,
-  }),
-  loadHotels: (hotels) => ({
-    type: ActionType.LOAD_HOTELS,
-    payload: hotels,
-  }),
-  loadHotel: (hotel) => ({
-    type: ActionType.LOAD_HOTEL,
-    payload: hotel,
-  }),
-  loadNearbyHotels: (hotels) => ({
-    type: ActionType.LOAD_NEARBY_HOTELS,
-    payload: hotels,
-  }),
-  loadReviews: (reviews) => ({
-    type: ActionType.LOAD_REVIEWS,
-    payload: reviews,
-  }),
-  requiredAuthorization: (status) => ({
-    type: ActionType.REQUIRED_AUTHORIZATION,
-    payload: status,
-  }),
-  logout: () => ({
-    type: ActionType.LOGOUT,
-  }),
-  redirectToRoute: (url) => ({
-    type: ActionType.REDIRECT_TO_ROUTE,
-    payload: url,
-  }),
-  setUser: (userData) => ({
-    type: ActionType.SET_USER,
-    payload: userData,
-  }),
-};
+export const changeCity = createAction(ActionType.CHANGE_CITY, (city) => ({
+  payload: city,
+}));
+
+export const setSortType = createAction(ActionType.SET_SORT_TYPE, (sort) => ({
+  payload: sort,
+}));
+
+export const loadHotels = createAction(ActionType.LOAD_HOTELS, (hotels) => ({
+  payload: hotels,
+}));
+
+export const loadHotel = createAction(ActionType.LOAD_HOTEL, (hotel) => ({
+  payload: hotel,
+}));
+
+export const loadNearbyHotels = createAction(ActionType.LOAD_NEARBY_HOTELS, (hotels) => ({
+  payload: hotels,
+}));
+
+export const loadReviews = createAction(ActionType.LOAD_REVIEWS, (reviews) => ({
+  payload: reviews,
+}));
+
+export const requiredAuthorization = createAction(ActionType.REQUIRED_AUTHORIZATION, (status) => ({
+  payload: status,
+}));
+
+export const logout = createAction(ActionType.LOGOUT);
+
+export const redirectToRoute = createAction(ActionType.REDIRECT_TO_ROUTE, (url) => ({
+  payload: url,
+}));
+
+export const setUser = createAction(ActionType.SET_USER, (userData) => ({
+  payload: userData,
+}));

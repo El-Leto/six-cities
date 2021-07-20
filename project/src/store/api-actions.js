@@ -1,4 +1,4 @@
-import { ActionCreator } from './action';
+import { loadHotels, loadNearbyHotels, loadHotel, redirectToRoute, loadReviews, setUser, requiredAuthorization, logout as closeSession } from './action';
 import { APIRoute, AuthorizationStatus, AppRoute } from '../const';
 import { adaptHotelsToClient, adaptUserToClient, adaptCommentToClient } from '../utils';
 
@@ -8,8 +8,7 @@ export const fetchHotelsList = () => (dispatch, _getState, api) => (
       const hotels = data.map((hotel) => adaptHotelsToClient(hotel));
       return hotels;
     })
-    .then((hotels) => dispatch(ActionCreator.loadHotels(hotels)))
-    //.catch(() => dispatch(ActionCreator.redirectToRoute(AppRoute.NOT_FOUND)))
+    .then((hotels) => dispatch(loadHotels(hotels)))
 );
 
 export const fetchNearbyHotelsList = (id) => (dispatch, _getState, api) => (
@@ -18,13 +17,13 @@ export const fetchNearbyHotelsList = (id) => (dispatch, _getState, api) => (
       const hotels = data.map((hotel) => adaptHotelsToClient(hotel));
       return hotels;
     })
-    .then((hotels) => dispatch(ActionCreator.loadNearbyHotels(hotels)))
+    .then((hotels) => dispatch(loadNearbyHotels(hotels)))
 );
 
 export const fetchHotel = (id) => (dispatch, _getState, api) => (
   api.get(`${APIRoute.HOTELS}/${id}`)
-    .then(({data}) => dispatch(ActionCreator.loadHotel(adaptHotelsToClient(data))))
-    .catch(() => dispatch(ActionCreator.redirectToRoute(AppRoute.NOT_FOUND)))
+    .then(({data}) => dispatch(loadHotel(adaptHotelsToClient(data))))
+    .catch(() => dispatch(redirectToRoute(AppRoute.NOT_FOUND)))
 );
 
 export const fetchReviews = (id) => (dispatch, _getState, api) => (
@@ -33,41 +32,40 @@ export const fetchReviews = (id) => (dispatch, _getState, api) => (
       const reviews = data.map((review) => adaptCommentToClient(review));
       return reviews;
     })
-    .then((reviews) => dispatch(ActionCreator.loadReviews(reviews)))
+    .then((reviews) => dispatch(loadReviews(reviews)))
 );
 
 export const postReview = (id, review) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.REVIEWS}/${id}`, review)
-    //.then(() => dispatch(ActionCreator.loadReviews(true)))
     .then(({data}) => {
       const reviews = data.map((item) => adaptCommentToClient(item));
       return reviews;
     })
-    .then((reviews) => dispatch(ActionCreator.loadReviews(reviews)))
+    .then((reviews) => dispatch(loadReviews(reviews)))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
     .then(({data}) => {
-      dispatch(ActionCreator.setUser(adaptUserToClient(data)));
-      dispatch(ActionCreator.requiredAuthorization(AuthorizationStatus.AUTH));
+      dispatch(setUser(adaptUserToClient(data)));
+      dispatch(requiredAuthorization(AuthorizationStatus.AUTH));
     })
-    .catch(() => dispatch(ActionCreator.requiredAuthorization(AuthorizationStatus.NO_AUTH)))
+    .catch(() => dispatch(requiredAuthorization(AuthorizationStatus.NO_AUTH)))
 );
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(APIRoute.LOGIN, {email, password})
     .then(({data}) => {
-      dispatch(ActionCreator.setUser(data));
+      dispatch(setUser(data));
       localStorage.setItem('token', data.token);
     })
-    .then(() => dispatch(ActionCreator.requiredAuthorization(AuthorizationStatus.AUTH)))
-    .then(() => dispatch(ActionCreator.redirectToRoute(AppRoute.MAIN)))
+    .then(() => dispatch(requiredAuthorization(AuthorizationStatus.AUTH)))
+    .then(() => dispatch(redirectToRoute(AppRoute.MAIN)))
 );
 
 export const logout = () => (dispatch, _getState, api) => (
   api.delete(APIRoute.LOGOUT)
     .then(() => localStorage.removeItem('token'))
-    .then(() => dispatch(ActionCreator.logout()))
-    .then(() => dispatch(ActionCreator.redirectToRoute(AppRoute.MAIN)))
+    .then(() => dispatch(closeSession()))
+    .then(() => dispatch(redirectToRoute(AppRoute.MAIN)))
 );

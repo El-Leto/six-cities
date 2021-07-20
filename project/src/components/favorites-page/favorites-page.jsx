@@ -1,13 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import FavoritesWrapper from '../favorites-wrapper/favorites-wrapper';
 import FavoritesEmptyWrapper from '../favorites-empty-wrapper/favorites-empty-wrapper';
 import Header from '../header/header';
-import hotelProp from '../app/hotel.prop';
+import { getHotels } from '../../store/data/selectors';
 
-function FavoritesPage(props) {
-  const {hotels} = props;
+function FavoritesPage() {
+  const hotels = useSelector(getHotels);
 
   const favoriteHotels = hotels.filter((hotel) => hotel.isFavorite);
 
@@ -29,13 +28,4 @@ function FavoritesPage(props) {
   );
 }
 
-FavoritesPage.propTypes = {
-  hotels: PropTypes.arrayOf(hotelProp).isRequired,
-};
-
-const mapStateToProps = ({ hotels }) => ({
-  hotels,
-});
-
-export { FavoritesPage };
-export default connect(mapStateToProps)(FavoritesPage);
+export default FavoritesPage;

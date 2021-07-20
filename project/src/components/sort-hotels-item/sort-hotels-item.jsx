@@ -1,9 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { ActionCreator } from '../../store/action';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSortType } from '../../store/action';
+import { getActiveSortTypes } from '../../store/process/selectors';
 
-function SortHotelsItem({ item, setSortType, activeSortType }) {
+function SortHotelsItem({ item }) {
+
+  const activeSortType = useSelector(getActiveSortTypes);
+
+  const dispatch = useDispatch();
 
   return (
     <li
@@ -14,7 +19,7 @@ function SortHotelsItem({ item, setSortType, activeSortType }) {
           : 'places__option'
       }
       onClick={() => {
-        setSortType(item);
+        dispatch(setSortType(item));
       }}
       tabIndex="0"
     >
@@ -25,13 +30,6 @@ function SortHotelsItem({ item, setSortType, activeSortType }) {
 
 SortHotelsItem.propTypes = {
   item: PropTypes.string.isRequired,
-  setSortType: PropTypes.func.isRequired,
-  activeSortType: PropTypes.string.isRequired,
 };
 
-const mapDispatchToProps = {
-  setSortType: ActionCreator.setSortType,
-};
-
-export { SortHotelsItem };
-export default connect(null, mapDispatchToProps)(SortHotelsItem);
+export default SortHotelsItem;
