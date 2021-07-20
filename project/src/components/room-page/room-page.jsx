@@ -10,7 +10,7 @@ import PlaceList from '../place-list/place-list';
 import MapPage from '../map-page/map-page';
 import { getRatingInPercent } from '../../utils';
 import { AuthorizationStatus } from '../../const';
-import { fetchHotel, fetchNearbyHotelsList, fetchReviews } from '../../store/api-actions';
+import { fetchHotel, fetchNearbyHotelsList, fetchReviews, sendFavoritePlace, fetchFavoriteList } from '../../store/api-actions';
 import { getHotel, getReviews, getNearbyHotels } from '../../store/data/selectors';
 import { getAuthorizationStatus } from '../../store/user/selectors';
 
@@ -42,10 +42,12 @@ function RoomPage() {
     dispatch(fetchHotel(params.id));
     dispatch(fetchNearbyHotelsList(params.id));
     dispatch(fetchReviews(params.id));
+    dispatch(fetchFavoriteList());
   }, [dispatch, params.id]);
 
   const placeRating = getRatingInPercent(rating);
 
+  const status = isFavorite ? '0' : '1';
 
   return (
 
@@ -72,7 +74,12 @@ function RoomPage() {
                     isFavorite
                       ? 'property__bookmark-button property__bookmark-button--active button'
                       : 'property__bookmark-button button'
-                  } type="button"
+                  }
+                  type="button"
+                  onClick={() => {
+                    dispatch(sendFavoritePlace(params.id, status));
+                    dispatch(fetchFavoriteList());
+                  }}
                 >
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>

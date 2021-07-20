@@ -1,4 +1,15 @@
-import { loadHotels, loadNearbyHotels, loadHotel, redirectToRoute, loadReviews, setUser, requiredAuthorization, logout as closeSession } from './action';
+import {
+  loadHotels,
+  loadNearbyHotels,
+  loadHotel,
+  loadFavorites,
+  redirectToRoute,
+  loadReviews,
+  setUser,
+  requiredAuthorization,
+  logout as closeSession,
+  updateFavorites
+} from './action';
 import { APIRoute, AuthorizationStatus, AppRoute } from '../const';
 import { adaptHotelsToClient, adaptUserToClient, adaptCommentToClient } from '../utils';
 
@@ -35,6 +46,16 @@ export const fetchReviews = (id) => (dispatch, _getState, api) => (
     .then((reviews) => dispatch(loadReviews(reviews)))
 );
 
+export const fetchFavoriteList = () => (dispatch, _getState, api) => (
+  api.get(APIRoute.FAVORITES)
+    .then(({data}) => {
+      dispatch(loadFavorites(
+        data.map((hotel) => adaptHotelsToClient(hotel)),
+      ));
+    })
+    //.catch(() => dispatch(redirectToRoute(AppRoute.SING_IN)))
+);
+
 export const postReview = (id, review) => (dispatch, _getState, api) => (
   api.post(`${APIRoute.REVIEWS}/${id}`, review)
     .then(({data}) => {
@@ -68,4 +89,13 @@ export const logout = () => (dispatch, _getState, api) => (
     .then(() => localStorage.removeItem('token'))
     .then(() => dispatch(closeSession()))
     .then(() => dispatch(redirectToRoute(AppRoute.MAIN)))
+);
+
+export const sendFavoritePlace = (id, status) => (dispatch, _getState, api) => (
+  api.post(`${APIRoute.FAVORITES}/${id}/${status}`)
+    .then(({data}) => {
+      dispatch(updateFavorites(adaptHotelsToClient(data)));
+    })
+    //.then((hotels) => dispatch(updateFavorites(hotels)))
+    //.catch(() => dispatch(redirectToRoute(AppRoute.SING_IN)))
 );

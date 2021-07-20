@@ -1,5 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { loadHotels, loadHotel, loadNearbyHotels, loadReviews } from '../action';
+import {
+  loadHotels,
+  loadHotel,
+  loadNearbyHotels,
+  loadReviews,
+  loadFavorites,
+  updateFavorites
+} from '../action';
 
 const initialState = {
   hotels: [],
@@ -7,6 +14,7 @@ const initialState = {
   reviews: [],
   isDataLoaded: false,
   nearbyHotels: [],
+  favorites: [],
 };
 
 const data = createReducer(initialState, (builder) => {
@@ -24,6 +32,12 @@ const data = createReducer(initialState, (builder) => {
     })
     .addCase(loadReviews, (state, action) => {
       state.reviews = action.payload;
+    })
+    .addCase(loadFavorites, (state, action) => {
+      state.favorites = action.payload;
+    })
+    .addCase(updateFavorites, (state, action) => {
+      state.hotel = action.payload;
     });
 });
 
