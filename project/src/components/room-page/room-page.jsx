@@ -9,8 +9,9 @@ import ReviewForm from '../review-form/review-form';
 import PlaceList from '../place-list/place-list';
 import MapPage from '../map-page/map-page';
 import { getRatingInPercent } from '../../utils';
-import { AuthorizationStatus } from '../../const';
-import { fetchHotel, fetchNearbyHotelsList, fetchReviews, sendFavoritePlace, fetchFavoriteList } from '../../store/api-actions';
+import { AuthorizationStatus, AppRoute } from '../../const';
+import { fetchHotel, fetchNearbyHotelsList, fetchReviews, sendFavoritePlace } from '../../store/api-actions';
+import { redirectToRoute } from '../../store/action';
 import { getHotel, getReviews, getNearbyHotels } from '../../store/data/selectors';
 import { getAuthorizationStatus } from '../../store/user/selectors';
 
@@ -22,6 +23,7 @@ function RoomPage() {
   const authorizationStatus = useSelector(getAuthorizationStatus);
 
   const {
+    id,
     price,
     images,
     isPremium,
@@ -39,13 +41,16 @@ function RoomPage() {
   const params = useParams();
 
   useEffect(() => {
-    dispatch(fetchHotel(params.id));
     dispatch(fetchNearbyHotelsList(params.id));
     dispatch(fetchReviews(params.id));
-    dispatch(fetchFavoriteList());
+    dispatch(fetchHotel(params.id));
   }, [dispatch, params.id]);
 
   const placeRating = getRatingInPercent(rating);
+
+  const handleButtonClick = () => {
+    dispatch(sendFavoritePlace(id, status));
+  };
 
   const status = isFavorite ? '0' : '1';
 
@@ -70,16 +75,11 @@ function RoomPage() {
                   {title}
                 </h1>
                 <button
-                  className={
-                    isFavorite
-                      ? 'property__bookmark-button property__bookmark-button--active button'
-                      : 'property__bookmark-button button'
-                  }
+                  className={`${isFavorite ? 'property__bookmark-button property__bookmark-button--active button' : 'property__bookmark-button button'}`}
                   type="button"
-                  onClick={() => {
-                    dispatch(sendFavoritePlace(params.id, status));
-                    dispatch(fetchFavoriteList());
-                  }}
+                  onClick={authorizationStatus === AuthorizationStatus.AUTH
+                    ? handleButtonClick
+                    : () => dispatch(redirectToRoute(AppRoute.SING_IN))}
                 >
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>

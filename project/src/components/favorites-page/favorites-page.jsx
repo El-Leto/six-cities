@@ -15,8 +15,6 @@ function FavoritesPage() {
     dispatch(fetchFavoriteList());
   }, [dispatch]);
 
-  //const favoriteHotels = hotels.filter((hotel) => hotel.isFavorite);
-
   return (
 
     <div className="page">

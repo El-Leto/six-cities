@@ -19,7 +19,7 @@ function FavoritesItem({ favoriteHotels, favoritesCity }) {
         </div>
       </div>
       <div className="favorites__places">
-        {hotels.map((place) => <PlaceCard key={place.id} hotel={place} placeType={PlaceType.FAVORITES} isFavorites />)}
+        {hotels.map((place) => <PlaceCard key={place.id} hotel={place} placeType={PlaceType.FAVORITES} />)}
       </div>
     </li>
   );

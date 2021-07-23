@@ -36,7 +36,7 @@ function HeaderAuth({ username, logoutApp }) {
 }
 
 HeaderAuth.propTypes = {
-  logoutApp: PropTypes.object.isRequired,
+  logoutApp: PropTypes.func.isRequired,
   username: PropTypes.string.isRequired,
 };
 

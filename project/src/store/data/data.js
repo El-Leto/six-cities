@@ -14,7 +14,6 @@ const initialState = {
   reviews: [],
   isDataLoaded: false,
   nearbyHotels: [],
-  favorites: [],
 };
 
 const data = createReducer(initialState, (builder) => {
@@ -37,7 +36,13 @@ const data = createReducer(initialState, (builder) => {
       state.favorites = action.payload;
     })
     .addCase(updateFavorites, (state, action) => {
-      state.hotel = action.payload;
+      const updatedHotel = action.payload;
+      const idx = state.hotels.findIndex((hotel) => hotel.id === updatedHotel.id);
+      state.hotels = [
+        ...state.hotels.slice(0, idx),
+        updatedHotel,
+        ...state.hotels.slice(idx + 1),
+      ];
     });
 });
 
