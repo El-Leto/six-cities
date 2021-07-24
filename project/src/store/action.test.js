@@ -9,6 +9,8 @@ import {
   logout,
   redirectToRoute,
   setUser,
+  loadFavorites,
+  updateFavorites,
   ActionType
 } from './action';
 
@@ -100,5 +102,23 @@ describe('Actions', () => {
     };
 
     expect(setUser({user: 'user'})).toEqual(expectedAction);
+  });
+
+  it('action creator for loading favorites returns correct action', () => {
+    const expectedAction = {
+      type: ActionType.LOAD_FAVORITES,
+      payload: [{hotel: 'hotel'}, {hotel: 'hotel'}],
+    };
+
+    expect(loadFavorites([{hotel: 'hotel'}, {hotel: 'hotel'}])).toEqual(expectedAction);
+  });
+
+  it('action creator for updating favorites returns correct action', () => {
+    const expectedAction = {
+      type: ActionType.UPDATE_FAVORITES,
+      payload: {hotel: 'hotel'},
+    };
+
+    expect(updateFavorites({hotel: 'hotel'})).toEqual(expectedAction);
   });
 });

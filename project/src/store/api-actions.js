@@ -64,7 +64,7 @@ export const checkAuth = () => (dispatch, _getState, api) => (
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(APIRoute.LOGIN, {email, password})
     .then(({data}) => {
-      dispatch(setUser(data));
+      dispatch(setUser(adaptUserToClient(data)));
       localStorage.setItem('token', data.token);
     })
     .then(() => dispatch(requiredAuthorization(AuthorizationStatus.AUTH)))
