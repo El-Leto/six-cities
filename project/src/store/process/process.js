@@ -1,8 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { changeCity, setSortType } from '../action';
-
-const INITIAL_CITY = 'Paris';
-const INITIAL_SITE_SORT = 'Popular';
+import { INITIAL_CITY, INITIAL_SITE_SORT } from '../../const';
 
 const initialState = {
   city: INITIAL_CITY,

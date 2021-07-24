@@ -75,3 +75,6 @@ export const CommentLength = {
   MIN: 50,
   MAX: 300,
 };
+
+export const INITIAL_CITY = 'Paris';
+export const INITIAL_SITE_SORT = 'Popular';
