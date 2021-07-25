@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setSortType } from '../../store/action';
 import { getActiveSortTypes } from '../../store/process/selectors';
 
-function SortHotelsItem({ item }) {
+function SortHotelsItem({ item, toggleSortingListVisibility }) {
 
   const activeSortType = useSelector(getActiveSortTypes);
 
@@ -20,6 +20,7 @@ function SortHotelsItem({ item }) {
       }
       onClick={() => {
         dispatch(setSortType(item));
+        toggleSortingListVisibility();
       }}
       tabIndex="0"
     >
@@ -30,6 +31,7 @@ function SortHotelsItem({ item }) {
 
 SortHotelsItem.propTypes = {
   item: PropTypes.string.isRequired,
+  toggleSortingListVisibility: PropTypes.func.isRequired,
 };
 
 export default SortHotelsItem;

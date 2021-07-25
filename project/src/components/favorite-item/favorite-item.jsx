@@ -4,7 +4,7 @@ import PlaceCard from '../place-card/place-card';
 import hotelProp from '../app/hotel.prop';
 import { PlaceType } from '../../const';
 
-function FavoritesItem({ favoriteHotels, favoritesCity }) {
+function FavoriteItem({ favoriteHotels, favoritesCity }) {
   const hotels = favoriteHotels.filter(
     (hotel) => hotel.city.name === favoritesCity,
   );
@@ -13,7 +13,7 @@ function FavoritesItem({ favoriteHotels, favoritesCity }) {
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <a className="locations__item-link" href="/#">
+          <a className="locations__item-link" href="/#" data-testid="locations__item-link">
             <span>{favoritesCity}</span>
           </a>
         </div>
@@ -25,9 +25,9 @@ function FavoritesItem({ favoriteHotels, favoritesCity }) {
   );
 }
 
-FavoritesItem.propTypes = {
+FavoriteItem.propTypes = {
   favoriteHotels: PropTypes.arrayOf(hotelProp),
   favoritesCity: PropTypes.string.isRequired,
 };
 
-export default FavoritesItem;
+export default FavoriteItem;
