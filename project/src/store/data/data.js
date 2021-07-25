@@ -1,5 +1,12 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { loadHotels, loadHotel, loadNearbyHotels, loadReviews } from '../action';
+import {
+  loadHotels,
+  loadHotel,
+  loadNearbyHotels,
+  loadReviews,
+  loadFavorites,
+  updateFavorites
+} from '../action';
 
 const initialState = {
   hotels: [],
@@ -24,6 +31,18 @@ const data = createReducer(initialState, (builder) => {
     })
     .addCase(loadReviews, (state, action) => {
       state.reviews = action.payload;
+    })
+    .addCase(loadFavorites, (state, action) => {
+      state.favorites = action.payload;
+    })
+    .addCase(updateFavorites, (state, action) => {
+      const updatedHotel = action.payload;
+      const idx = state.hotels.findIndex((hotel) => hotel.id === updatedHotel.id);
+      state.hotels = [
+        ...state.hotels.slice(0, idx),
+        updatedHotel,
+        ...state.hotels.slice(idx + 1),
+      ];
     });
 });
 
