@@ -1,6 +1,8 @@
 import React from 'react';
 import { css } from '@emotion/react';
 import DotLoader from 'react-spinners/DotLoader';
+import Toast from '../toast/toast';
+import { ToastMessages } from '../../const';
 
 const override = css`
   display: block;
@@ -9,7 +11,10 @@ const override = css`
 
 function LoadingScreen() {
   return (
-    <DotLoader color={'#696969'} css={override} size={200} />
+    <div>
+      <Toast message={ToastMessages.OFFLINE} />
+      <DotLoader color={'#696969'} css={override} size={200} />
+    </div>
   );
 }
 

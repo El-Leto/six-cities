@@ -72,4 +72,7 @@ const adaptCommentToClient = (review) => {
   return adaptedComment;
 };
 
-export { getRatingInPercent, adaptHotelsToClient, adaptUserToClient, adaptCommentToClient, sortHotels };
+const uppercaseFirstLetter = (str) =>
+  str.charAt(0).toUpperCase() + str.slice(1);
+
+export { getRatingInPercent, adaptHotelsToClient, adaptUserToClient, adaptCommentToClient, sortHotels, uppercaseFirstLetter };

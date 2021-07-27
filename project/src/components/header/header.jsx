@@ -5,12 +5,13 @@ import { AuthorizationStatus } from '../../const';
 import { logout } from '../../store/api-actions';
 import HeaderAuth from '../header-auth/header-auth';
 import HeaderGuest from '../header-guest/header-guest';
-import { getAuthorizationStatus, getUsername } from '../../store/user/selectors';
+import { getAuthorizationStatus, getUsername, getUserAvatar } from '../../store/user/selectors';
 
 
 function Header() {
 
   const username = useSelector(getUsername);
+  const avatarUrl = useSelector(getUserAvatar);
   const authorizationStatus = useSelector(getAuthorizationStatus);
 
   return (
@@ -24,7 +25,7 @@ function Header() {
             <ul className="header__nav-list">
               {
                 authorizationStatus === AuthorizationStatus.AUTH
-                  ? <HeaderAuth logoutApp={logout} username={username} />
+                  ? <HeaderAuth logoutApp={logout} username={username} avatarUrl={avatarUrl} />
                   : <HeaderGuest />
               }
             </ul>

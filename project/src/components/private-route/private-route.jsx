@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { AppRoute, AuthorizationStatus } from '../../const';
 import { getAuthorizationStatus } from '../../store/user/selectors';
 
-function PrivateRoute({render, path, exact}) {
+function PrivateRoute({render, path, exact, status, redirect}) {
   const authorizationStatus = useSelector(getAuthorizationStatus);
 
   return (
@@ -13,9 +12,9 @@ function PrivateRoute({render, path, exact}) {
       path={path}
       exact={exact}
       render={(routeProps) => (
-        authorizationStatus === AuthorizationStatus.AUTH
+        authorizationStatus === status
           ? render(routeProps)
-          : <Redirect to={AppRoute.SING_IN} />
+          : <Redirect to={redirect} />
       )}
     />
   );
@@ -25,6 +24,8 @@ PrivateRoute.propTypes = {
   exact: PropTypes.bool.isRequired,
   path: PropTypes.string.isRequired,
   render: PropTypes.func.isRequired,
+  status: PropTypes.string,
+  redirect: PropTypes.string.isRequired,
 };
 
 export default PrivateRoute;

@@ -76,9 +76,39 @@ export const CommentLength = {
   MAX: 300,
 };
 
+export const Ratings = {
+  PERFECT: {
+    value: 5,
+    title: 'perfect',
+  },
+  GOOD: {
+    value: 4,
+    title: 'good',
+  },
+  NOT_BAD: {
+    value: 3,
+    title: 'not bad',
+  },
+  BADLY: {
+    value: 2,
+    title: 'badly',
+  },
+  TERRIBLY: {
+    value: 1,
+    title: 'terribly',
+  },
+};
+
+export const ToastMessages = {
+  DEFAULT: 'Something went wrong',
+  OFFLINE: 'Connection is lost',
+  REVIEW_ERROR: 'The review is not sent. Please try again',
+};
+
 export const INITIAL_CITY = 'Paris';
 export const INITIAL_SITE_SORT = 'Popular';
 export const FIRST_ELEMENT = 0;
 export const MAX_IMAGES = 6;
 export const MAX_REVIEWS = 10;
 export const DEFAULT_RATING = 0;
+export const DEFAULT_TIMEOUT = 2500;

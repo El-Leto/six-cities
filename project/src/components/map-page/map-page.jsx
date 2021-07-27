@@ -72,6 +72,7 @@ MapPage.propTypes = {
       longitude: PropTypes.number.isRequired,
       zoom: PropTypes.number.isRequired,
     }).isRequired,
+    name: PropTypes.string.isRequired,
   }).isRequired,
   hotels: PropTypes.arrayOf(hotelProp).isRequired,
   activeCard: PropTypes.object,

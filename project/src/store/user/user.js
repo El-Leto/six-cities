@@ -4,7 +4,16 @@ import { AuthorizationStatus } from '../../const';
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.UNKNOWN,
-  username: '',
+  user: {
+    avatarUrl: '',
+    email: '',
+    id: null,
+    isPro: false,
+    name: '',
+  },
+  isReviewSending: false,
+  isReviewSuccess: false,
+  isReviewError: false,
 };
 
 const user = createReducer(initialState, (builder) => {
@@ -13,10 +22,22 @@ const user = createReducer(initialState, (builder) => {
       state.authorizationStatus = action.payload;
     })
     .addCase(setUser, (state, action) => {
-      state.username = action.payload.email;
+      state.user = {
+        avatarUrl: action.payload.avatarUrl,
+        email: action.payload.email,
+        id: action.payload.id,
+        isPro: action.payload.isPro,
+        name: action.payload.name,
+      };
     })
     .addCase(logout, (state, action) => {
-      state.username = '';
+      state.user = {
+        avatarUrl: '',
+        email: '',
+        id: null,
+        isPro: false,
+        name: '',
+      };
       state.authorizationStatus = AuthorizationStatus.NO_AUTH;
     });
 });

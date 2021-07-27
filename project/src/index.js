@@ -9,6 +9,8 @@ import { requiredAuthorization } from './store/action';
 import { checkAuth, fetchHotelsList } from './store/api-actions';
 import { AuthorizationStatus } from './const';
 import { redirect } from './store/middlewares/redirect';
+import browserHistory from './browser-history';
+import {Router as BrowserRouter} from 'react-router-dom';
 
 const api = createAPI(
   () => store.dispatch(requiredAuthorization(AuthorizationStatus.NO_AUTH)),
@@ -30,7 +32,9 @@ store.dispatch(fetchHotelsList());
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter history={browserHistory}>
+        <App />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'));

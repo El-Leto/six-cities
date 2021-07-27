@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import hotelProp from '../app/hotel.prop';
-import { getRatingInPercent } from '../../utils';
+import { getRatingInPercent, uppercaseFirstLetter } from '../../utils';
 import { placeCardType } from '../../const';
 import { sendFavoritePlace } from '../../store/api-actions';
 
@@ -75,9 +75,11 @@ function PlaceCard({ hotel, placeType, onMouseEnter, onMouseLeave }) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="/#">{title}</a>
+          <Link to={`/offer/${id}`}>
+            {title}
+          </Link>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{uppercaseFirstLetter(type)}</p>
       </div>
     </article>
   );
