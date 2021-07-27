@@ -48,7 +48,7 @@ function MainPage() {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{hotels.length} places to stay in {city}</b>
+              <b className="places__found">{sortedByCityHotels.length} places to stay in {city}</b>
               <SortHotels sortTypes={SORTS} />
               <PlaceList
                 isMainPage

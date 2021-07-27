@@ -24,6 +24,7 @@ function PlaceCard({ hotel, placeType, onMouseEnter, onMouseLeave }) {
 
   const placeRating = getRatingInPercent(rating);
 
+
   return (
     <article
       onMouseEnter={onMouseEnter}

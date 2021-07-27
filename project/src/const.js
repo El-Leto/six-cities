@@ -75,3 +75,10 @@ export const CommentLength = {
   MIN: 50,
   MAX: 300,
 };
+
+export const INITIAL_CITY = 'Paris';
+export const INITIAL_SITE_SORT = 'Popular';
+export const FIRST_ELEMENT = 0;
+export const MAX_IMAGES = 6;
+export const MAX_REVIEWS = 10;
+export const DEFAULT_RATING = 0;
