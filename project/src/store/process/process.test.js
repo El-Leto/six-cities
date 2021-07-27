@@ -2,7 +2,7 @@ import { process } from './process';
 import { ActionType } from '../action';
 import { INITIAL_CITY, INITIAL_SITE_SORT } from '../../const';
 
-describe('Reducer: data', () => {
+describe('Reducer: process', () => {
   it('without additional parameters should return initial state', () => {
     expect(process(undefined, {}))
       .toEqual({

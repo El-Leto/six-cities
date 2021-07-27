@@ -11,9 +11,6 @@ const initialState = {
     isPro: false,
     name: '',
   },
-  isReviewSending: false,
-  isReviewSuccess: false,
-  isReviewError: false,
 };
 
 const user = createReducer(initialState, (builder) => {
