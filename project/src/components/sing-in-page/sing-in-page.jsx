@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../../store/api-actions';
 import Header from '../header/header';
@@ -10,13 +10,30 @@ function SingInPage() {
 
   const dispatch = useDispatch();
 
+  const [isError, setIsError] = useState(false);
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
+
+  const handlePasswordChange = (evt) =>
+    setIsError(evt.target.value.trim().length === 0);
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    setIsSubmitDisabled(true);
+
+    const password = passwordRef.current.value.trim();
+
+    if(isError) {
+      setIsSubmitDisabled(false);
+      return;
+    }
 
     dispatch(login({
       login: loginRef.current.value,
-      password: passwordRef.current.value,
-    }));
+      password: password,
+    }))
+      .catch(() => {
+        setIsSubmitDisabled(false);
+      });
   };
 
   return (
@@ -55,11 +72,14 @@ function SingInPage() {
                   placeholder="Password"
                   required
                   data-testid="password"
+                  style={isError ? {borderColor: 'red'} : {} }
+                  onChange={handlePasswordChange}
                 />
               </div>
               <button
                 className="login__submit form__submit button"
                 type="submit"
+                disabled={isSubmitDisabled}
               >
                 Sign in
               </button>
