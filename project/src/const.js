@@ -78,3 +78,5 @@ export const CommentLength = {
 
 export const INITIAL_CITY = 'Paris';
 export const INITIAL_SITE_SORT = 'Popular';
+export const FIRST_ELEMENT = 0;
+export const MAX_IMAGES = 6;

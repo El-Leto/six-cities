@@ -24,7 +24,6 @@ function PlaceCard({ hotel, placeType, onMouseEnter, onMouseLeave }) {
 
   const placeRating = getRatingInPercent(rating);
 
-  console.log(placeRating);
 
   return (
     <article
