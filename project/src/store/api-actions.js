@@ -84,4 +84,5 @@ export const sendFavoritePlace = (id, status) => (dispatch, _getState, api) => (
       dispatch(updateFavorites(adaptHotelsToClient(data)));
       dispatch(loadHotel(adaptHotelsToClient(data)));
     })
+    .catch(() => dispatch(redirectToRoute(AppRoute.SING_IN)))
 );

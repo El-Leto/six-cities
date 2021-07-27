@@ -2,10 +2,10 @@ import { SortType } from './const';
 
 const PERCENT_IN_ONE_RATING = 20;
 
-const getRatingInPercent = (rating) =>
-  `${rating * PERCENT_IN_ONE_RATING}%`;
+const getRatingInPercent = (rating) => `${Math.round(rating) * PERCENT_IN_ONE_RATING}%`;
 
-export const sortHotels = (sort, hotels) => {
+
+const sortHotels = (sort, hotels) => {
   switch (sort) {
     case SortType.BY_CHEAPER:
       return hotels.slice().sort((a, b) => a.price - b.price);
@@ -72,4 +72,4 @@ const adaptCommentToClient = (review) => {
   return adaptedComment;
 };
 
-export { getRatingInPercent, adaptHotelsToClient, adaptUserToClient, adaptCommentToClient };
+export { getRatingInPercent, adaptHotelsToClient, adaptUserToClient, adaptCommentToClient, sortHotels };
